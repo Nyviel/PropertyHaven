@@ -1,4 +1,5 @@
 import "@/assets/styles/globals.css";
+import Navbar from "@/components/Navbar";
 
 export const metadata = {
 	title: "Property Haven | Your go to rental website",
@@ -11,7 +12,8 @@ const MainLayout = ({ children }) => {
 	return (
 		<html lang="en">
 			<body>
-				<div>{children}</div>
+				<Navbar></Navbar>
+				<main>{children}</main>
 			</body>
 		</html>
 	);
