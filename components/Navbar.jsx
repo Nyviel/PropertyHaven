@@ -59,6 +59,7 @@ const Navbar = () => {
 							<Image
 								className="h-10 w-auto"
 								src={logo}
+								priority="true"
 								alt="PropertyHaven"
 							/>
 
