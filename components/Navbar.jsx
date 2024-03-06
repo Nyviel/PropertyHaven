@@ -4,9 +4,10 @@ import Image from "next/image";
 import logo from "@/assets/images/logo-white.png";
 import profileDefault from "@/assets/images/profile.png";
 import Link from "next/link";
-import { FaGoogle } from "react-icons/fa";
+import { FaSignInAlt, FaSignOutAlt, FaPen } from "react-icons/fa";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
+import NavbarLink from "./NavbarLink";
 
 const Navbar = () => {
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -70,54 +71,45 @@ const Navbar = () => {
 						{/* <!-- Desktop Menu Hidden below md screens --> */}
 						<div className="hidden md:ml-6 md:block">
 							<div className="flex space-x-2">
-								<Link
-									href="/"
-									className={`${
-										pathname === "/" ? "bg-black" : ""
-									} text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2`}
-								>
-									Home
-								</Link>
-								<Link
-									href="/properties"
-									className={`${
-										pathname === "/properties"
-											? "bg-black"
-											: ""
-									} text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2`}
-								>
-									Properties
-								</Link>
-								{isLoggedIn ?? (
-									<Link
-										href="/properties/add"
-										className={`${
-											pathname === "/properties/add"
-												? "bg-black"
-												: ""
-										} text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2`}
-									>
-										Add Property
-									</Link>
+								<NavbarLink route="/" text="Home" />
+								<NavbarLink
+									route="/properties"
+									text="Properties"
+								/>
+								{isLoggedIn && (
+									<NavbarLink
+										route="/properties/add"
+										text="Add Property"
+									/>
 								)}
 							</div>
 						</div>
 					</div>
 
 					{/* <!-- Right Side Menu (Logged Out) --> */}
-					{!isLoggedIn ?? (
-						<div className="md:block md:ml-6">
-							<div className="flex items-center">
-								<button className="flex items-center text-white bg-gray-700 hover:bg-gray-900 hover:text-white rounded-md px-3 py-2">
-									<FaGoogle className="text-white mr-2"></FaGoogle>
-									<span>Login or Register</span>
-								</button>
+					{!isLoggedIn && (
+						<div className="hidden md:block md:ml-6">
+							<div className="flex items-center gap-3">
+								<Link
+									href="/login"
+									className="flex items-center text-white bg-blue-500 hover:bg-blue-900 hover:text-white rounded-md px-3 py-2"
+								>
+									<FaSignInAlt className="inline-block mr-2" />
+									<span>Login</span>
+								</Link>
+								<Link
+									href="/register"
+									className="flex items-center text-white bg-orange-600 hover:bg-orange-800 hover:text-white rounded-md px-3 py-2"
+								>
+									<FaPen className="inline-block mr-2" />
+									<span>Register</span>
+								</Link>
 							</div>
 						</div>
 					)}
 
 					{/* <!-- Right Side Menu (Logged In) --> */}
-					{isLoggedIn ?? (
+					{isLoggedIn && (
 						<div className="absolute inset-y-0 right-0 flex items-center pr-2 md:static md:inset-auto md:ml-6 md:pr-0">
 							<Link href="/messages" className="relative group">
 								<button
@@ -221,40 +213,48 @@ const Navbar = () => {
 
 			{/* <!-- Mobile menu, show/hide based on menu state. --> */}
 			{isMobileMenuOpen && (
-				<div id="mobile-menu">
-					<div className="space-y-1 px-2 pb-3 pt-2">
-						<Link
-							href="/"
-							className={`${
-								pathname === "/" ? "bg-black" : ""
-							} text-white block rounded-md px-3 py-2 text-base font-medium`}
-						>
-							Home
-						</Link>
-						<Link
-							href="/properties"
-							className={`${
-								pathname === "/properties" ? "bg-black" : ""
-							} text-white block rounded-md px-3 py-2 text-base font-medium`}
-						>
-							Properties
-						</Link>
-						{isLoggedIn ?? (
-							<Link
-								href="/properties/add"
-								className={`${
-									pathname === "/properties/add"
-										? "bg-black"
-										: ""
-								} text-white block rounded-md px-3 py-2 text-base font-medium`}
-							>
-								Add Property
-							</Link>
+				<div id="mobile-menu" className="block md:hidden">
+					<div className="flex flex-col gap-y-3 px-2 pb-3 pt-2">
+						<NavbarLink
+							route="/"
+							text="Home"
+							onClick={() => {
+								setIsMobileMenuOpen((prev) => !prev);
+							}}
+						/>
+						<NavbarLink
+							route="/properties"
+							text="Properties"
+							onClick={() => {
+								setIsMobileMenuOpen((prev) => !prev);
+							}}
+						/>
+						{isLoggedIn && (
+							<NavbarLink
+								route="/properties/add"
+								text="Add Property"
+							/>
 						)}
-						<button className="flex items-center text-white bg-gray-700 hover:bg-gray-900 hover:text-white rounded-md px-3 py-2 my-4">
-							<FaGoogle className="text-white mr-2"></FaGoogle>
-							<span>Login or Register</span>
-						</button>
+						<Link
+							href="/login"
+							className="flex items-center text-white bg-blue-500 hover:bg-blue-900 hover:text-white rounded-md px-3 py-2"
+							onClick={() => {
+								setIsMobileMenuOpen((prev) => !prev);
+							}}
+						>
+							<FaSignInAlt className="inline-block mr-2" />
+							<span>Login</span>
+						</Link>
+						<Link
+							href="/register"
+							className="flex items-center text-white bg-orange-600 hover:bg-orange-800 hover:text-white rounded-md px-3 py-2"
+							onClick={() => {
+								setIsMobileMenuOpen((prev) => !prev);
+							}}
+						>
+							<FaPen className="inline-block mr-2" />
+							<span>Register</span>
+						</Link>
 					</div>
 				</div>
 			)}
