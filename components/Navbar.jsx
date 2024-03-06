@@ -5,16 +5,25 @@ import logo from "@/assets/images/logo-white.png";
 import profileDefault from "@/assets/images/profile.png";
 import Link from "next/link";
 import { FaSignInAlt, FaSignOutAlt, FaPen } from "react-icons/fa";
-import { useState } from "react";
-import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import NavbarLink from "./NavbarLink";
+import { signOut, useSession } from "next-auth/react";
 
 const Navbar = () => {
+	const { data: session } = useSession();
+
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 	const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-	const pathname = usePathname();
+	useEffect(() => {
+		console.log(session);
+		if (session?.user) {
+			setIsLoggedIn(true);
+		} else {
+			setIsLoggedIn(false);
+		}
+	}, [session]);
 
 	return (
 		<nav className="bg-blue-700 border-b border-blue-500">
@@ -91,14 +100,14 @@ const Navbar = () => {
 						<div className="hidden md:block md:ml-6">
 							<div className="flex items-center gap-3">
 								<Link
-									href="/login"
+									href="/auth/login"
 									className="flex items-center text-white bg-blue-500 hover:bg-blue-900 hover:text-white rounded-md px-3 py-2"
 								>
 									<FaSignInAlt className="inline-block mr-2" />
 									<span>Login</span>
 								</Link>
 								<Link
-									href="/register"
+									href="/auth/register"
 									className="flex items-center text-white bg-orange-600 hover:bg-orange-800 hover:text-white rounded-md px-3 py-2"
 								>
 									<FaPen className="inline-block mr-2" />
@@ -200,6 +209,9 @@ const Navbar = () => {
 											role="menuitem"
 											tabIndex="-1"
 											id="user-menu-item-2"
+											onClick={() => {
+												signOut();
+											}}
 										>
 											Sign Out
 										</button>
@@ -236,7 +248,7 @@ const Navbar = () => {
 							/>
 						)}
 						<Link
-							href="/login"
+							href="/auth/login"
 							className="flex items-center text-white bg-blue-500 hover:bg-blue-900 hover:text-white rounded-md px-3 py-2"
 							onClick={() => {
 								setIsMobileMenuOpen((prev) => !prev);
@@ -246,7 +258,7 @@ const Navbar = () => {
 							<span>Login</span>
 						</Link>
 						<Link
-							href="/register"
+							href="/auth/register"
 							className="flex items-center text-white bg-orange-600 hover:bg-orange-800 hover:text-white rounded-md px-3 py-2"
 							onClick={() => {
 								setIsMobileMenuOpen((prev) => !prev);
