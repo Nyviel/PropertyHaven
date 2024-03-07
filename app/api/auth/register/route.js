@@ -7,11 +7,10 @@ export const POST = async (request) => {
 	try {
 		await connectDB();
 		const body = await request.json();
-		const { username, email, password } = body;
-		console.log(username, email, password);
+		const { name, email, password } = body;
 		const hash = await bcrypt.hash(password, 10);
 		const createdUser = await User.create({
-			username,
+			name,
 			email,
 			password: hash,
 		});

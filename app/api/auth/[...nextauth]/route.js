@@ -2,14 +2,15 @@ import User from "@/models/User";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
+import connectDB from "@/config/database";
 
 export const authOptions = {
 	providers: [
 		CredentialsProvider({
 			name: "credentials",
 			async authorize(credentials, req) {
+				await connectDB();
 				const { email, password } = credentials;
-
 				const user = await User.findOne({ email });
 				if (!user) {
 					return null;
@@ -27,16 +28,8 @@ export const authOptions = {
 					return null;
 				}
 			},
-			async session({ session }) {
-				const user = await User.findOne({
-					email: session?.user?.email,
-				});
-			},
 		}),
 	],
-	session: {
-		strategy: "jwt",
-	},
 	secret: process.env.NEXTAUTH_SECRET,
 	pages: {
 		signIn: "/auth/login",

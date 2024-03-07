@@ -8,14 +8,14 @@ import { FaArrowRight } from "react-icons/fa";
 
 const RegisterPage = () => {
 	const [email, setEmail] = useState("");
-	const [username, setUsername] = useState("");
+	const [name, setName] = useState("");
 	const [password, setPassword] = useState("");
 	const [repeatPassword, setRepeatPassword] = useState("");
 	const [error, setError] = useState("");
 	const router = useRouter();
 	const handleFormSubmit = async (e) => {
 		e.preventDefault();
-		if (!email || !username || !password || !repeatPassword) {
+		if (!email || !name || !password || !repeatPassword) {
 			setError("Form fields can't be empty");
 			return;
 		}
@@ -25,7 +25,7 @@ const RegisterPage = () => {
 			return;
 		}
 
-		const res = await postUser({ username, email, password });
+		const res = await postUser({ name, email, password });
 		if (!res) {
 			setError("Failed to create an account");
 		} else {
@@ -59,7 +59,7 @@ const RegisterPage = () => {
 								placeholder="Full name..."
 								required
 								onChange={(e) => {
-									setUsername(e.target.value);
+									setName(e.target.value);
 								}}
 							/>
 						</div>
