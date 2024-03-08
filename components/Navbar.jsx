@@ -17,7 +17,6 @@ const Navbar = () => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 	useEffect(() => {
-		console.log(session);
 		if (session?.user) {
 			setIsLoggedIn(true);
 		} else {
@@ -192,6 +191,9 @@ const Navbar = () => {
 											role="menuitem"
 											tabIndex="-1"
 											id="user-menu-item-0"
+											onClick={() => {
+												setIsProfileMenuOpen(false);
+											}}
 										>
 											Your Profile
 										</Link>
@@ -201,6 +203,9 @@ const Navbar = () => {
 											role="menuitem"
 											tabIndex="-1"
 											id="user-menu-item-2"
+											onClick={() => {
+												setIsProfileMenuOpen(false);
+											}}
 										>
 											Saved Properties
 										</Link>
@@ -210,6 +215,7 @@ const Navbar = () => {
 											tabIndex="-1"
 											id="user-menu-item-2"
 											onClick={() => {
+												setIsProfileMenuOpen(false);
 												signOut();
 											}}
 										>
@@ -230,14 +236,14 @@ const Navbar = () => {
 						<NavbarLink
 							route="/"
 							text="Home"
-							onClick={() => {
+							click={() => {
 								setIsMobileMenuOpen((prev) => !prev);
 							}}
 						/>
 						<NavbarLink
 							route="/properties"
 							text="Properties"
-							onClick={() => {
+							click={() => {
 								setIsMobileMenuOpen((prev) => !prev);
 							}}
 						/>
@@ -245,6 +251,9 @@ const Navbar = () => {
 							<NavbarLink
 								route="/properties/add"
 								text="Add Property"
+								click={() => {
+									setIsMobileMenuOpen((prev) => !prev);
+								}}
 							/>
 						)}
 						<Link
