@@ -14,7 +14,7 @@ const MainLayout = ({ children }) => {
 	return (
 		<AuthProvider>
 			<html lang="en">
-				<body className="flex flex-col">
+				<body className="flex flex-col bg-blue-100">
 					<Navbar />
 					<main className="flex-1">{children}</main>
 					<Footer />
