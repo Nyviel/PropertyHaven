@@ -20,7 +20,7 @@ export async function fetchProperties() {
 export async function fetchProperty(id) {
 	try {
 		if (!api) {
-			return {};
+			return null;
 		}
 		const res = await fetch(`${api}/properties/${id}`);
 		if (!res.ok) {
@@ -29,6 +29,6 @@ export async function fetchProperty(id) {
 		return res.json();
 	} catch (error) {
 		console.log("SERVICE:(/properties/:id) Error: ", error);
-		return {};
+		return null;
 	}
 }
