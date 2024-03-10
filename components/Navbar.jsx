@@ -18,6 +18,7 @@ const Navbar = () => {
 
 	useEffect(() => {
 		if (session?.user) {
+			console.log(session);
 			setIsLoggedIn(true);
 		} else {
 			setIsLoggedIn(false);
