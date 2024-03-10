@@ -17,9 +17,9 @@ const PropertyAddForm = () => {
 		square_feet: "1800",
 		amenities: [],
 		rates: {
+			nightly: "",
 			weekly: "",
 			monthly: "",
-			nightly: "",
 		},
 		seller_info: {
 			name: "",
@@ -34,10 +34,12 @@ const PropertyAddForm = () => {
 
 		if (name.includes(".")) {
 			const [outerKey, innerKey] = name.split(".");
+			console.log(outerKey, innerKey, value);
 			setFields((prev) => ({
 				...prev,
 				[outerKey]: { ...prev[outerKey], [innerKey]: value },
 			}));
+			console.log(fields);
 		} else {
 			setFields((prev) => ({ ...prev, [name]: value }));
 		}
@@ -71,7 +73,11 @@ const PropertyAddForm = () => {
 	};
 
 	return (
-		<form>
+		<form
+			method="POST"
+			action="/api/properties"
+			encType="multipart/form-data"
+		>
 			<h2 className="text-3xl text-center font-semibold mb-6 text-blue-500">
 				Add Property
 			</h2>
@@ -453,6 +459,19 @@ const PropertyAddForm = () => {
 				</label>
 				<div className="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
 					<div className="flex items-center">
+						<label htmlFor="nightly_rate" className="mr-2">
+							Nightly
+						</label>
+						<input
+							type="number"
+							id="nightly_rate"
+							name="rates.nightly"
+							className="border rounded w-full py-2 px-3"
+							value={fields.rates.nightly}
+							onChange={handleChange}
+						/>
+					</div>
+					<div className="flex items-center">
 						<label htmlFor="weekly_rate" className="mr-2">
 							Weekly
 						</label>
@@ -478,19 +497,6 @@ const PropertyAddForm = () => {
 							onChange={handleChange}
 						/>
 					</div>
-					<div className="flex items-center">
-						<label htmlFor="nightly_rate" className="mr-2">
-							Nightly
-						</label>
-						<input
-							type="number"
-							id="nightly_rate"
-							name="rates.nightly"
-							className="border rounded w-full py-2 px-3"
-							value={fields.rates.nightly}
-							onChange={handleChange}
-						/>
-					</div>
 				</div>
 			</div>
 
@@ -504,7 +510,7 @@ const PropertyAddForm = () => {
 				<input
 					type="text"
 					id="seller_name"
-					name="seller_info.name."
+					name="seller_info.name"
 					className="border rounded w-full py-2 px-3"
 					placeholder="Name"
 					value={fields.seller_info.name}
