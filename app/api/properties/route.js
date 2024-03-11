@@ -1,6 +1,7 @@
 import connectDB from "@/config/database";
 import Property from "@/models/Property";
 import { getSessionUser } from "@/utils/getSessionUser";
+import cloudinary from "@/config/cloudinary";
 
 // GET: /api/properties
 export const GET = async (request) => {
@@ -58,14 +59,30 @@ export const POST = async (request) => {
 			},
 			owner: userId,
 		};
-		console.log("SU: ", sessionUser);
-		console.log("PD: ", propertyData);
-		console.log("I:", images);
+
+		const imageUploads = [];
+
+		for (const image of images) {
+			const imageBuffer = await image.arrayBuffer();
+			const imageArray = Array.from(new Uint8Array(imageBuffer));
+			const imageData = Buffer.from(imageArray);
+
+			const imageBase64 = imageData.toString("base64");
+			const result = await cloudinary.uploader.upload(
+				`data:image/png;base64,${imageBase64}`,
+				{ folder: "property-haven" }
+			);
+
+			imageUploads.push(result.secure_url);
+		}
+
+		propertyData.images = imageUploads;
+
 		const newProperty = await Property.create(propertyData);
+
 		return Response.redirect(
 			`${process.env.NEXTAUTH_URL}/properties/${newProperty._id}`
 		);
-		// return new Response("Successfully added a property", { status: 200 });
 	} catch (error) {
 		console.error("API:(/api/properties) ENCOUNTERED ERROR: ", error);
 		return new Response("Failed to add a property", { status: 500 });
