@@ -6,7 +6,7 @@ export async function fetchProperties() {
 			return [];
 		}
 
-		const res = await fetch(`${api}/properties`);
+		const res = await fetch(`${api}/properties`, { cache: "no-store" });
 		if (!res.ok) {
 			throw new Error("Failed to fetch data");
 		}
@@ -30,5 +30,21 @@ export async function fetchProperty(id) {
 	} catch (error) {
 		console.log("SERVICE:(/properties/:id) Error: ", error);
 		return null;
+	}
+}
+
+export async function fetchPropertiesByUID(uid) {
+	try {
+		if (!api) {
+			return [];
+		}
+		const res = await fetch(`${api}/properties/user/${uid}`);
+		if (!res.ok) {
+			throw new Error("Failed to fetch data");
+		}
+		return res.json();
+	} catch (error) {
+		console.log("SERVICE:(/properties/user/:uid Error: ", error);
+		return [];
 	}
 }
