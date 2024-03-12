@@ -4,7 +4,7 @@ const NotFoundPage = () => {
 	return (
 		<section className="bg-blue-100 h-full w-full flex items-center justify-center">
 			<div className="container max-w-2xl">
-				<div className="bg-white px-6 py-10 mb-4 shadow-md rounded-md border m-4 md:m-0">
+				<div className="px-6 py-10 m-4 md:m-0">
 					<div className="flex justify-center">
 						<p className="text-8xl font-extrabold text-red-500">
 							404
