@@ -22,7 +22,7 @@ const PropertyCard = ({ property }) => {
 	return (
 		<div className="bg-white rounded-xl shadow-md relative">
 			<Image
-				src={`/properties/${property.images[0]}`}
+				src={property.images[0]}
 				alt=""
 				height={0}
 				width={0}
@@ -55,7 +55,7 @@ const PropertyCard = ({ property }) => {
 				</div>
 
 				<div className="flex justify-center gap-4 text-green-900 text-sm mb-4">
-					{property.rates.nigthly && (
+					{property.rates.nightly && (
 						<p>
 							<FaMoneyBill className="inline mr-2" />
 							Nightly
