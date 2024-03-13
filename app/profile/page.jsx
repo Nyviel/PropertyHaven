@@ -5,18 +5,58 @@ import ProfileDefault from "@/assets/images/profile.png";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { fetchPropertiesByUID } from "@/services/propertiesService";
+import {
+	deleteProperty,
+	fetchPropertiesByUID,
+} from "@/services/propertiesService";
+import Spinner from "@/components/Spinner";
+import { toast } from "react-toastify";
+
 const ProfilePage = () => {
 	const { data: session } = useSession();
 	const [properties, setProperties] = useState([]);
+	const [loading, setLoading] = useState(true);
+
 	useEffect(() => {
 		const getProps = async () => {
 			if (!session) return;
 
-			setProperties(await fetchPropertiesByUID(session.user.id));
+			try {
+				const newProperties = await fetchPropertiesByUID(
+					session.user.id
+				);
+				setProperties(newProperties);
+			} catch (error) {
+				console.log(error);
+			} finally {
+				setLoading(false);
+			}
 		};
 		getProps();
 	}, [session]);
+
+	const handleDeleteProperty = async (id) => {
+		const confirmed = window.confirm(
+			"Are you sure you want to delete this property?"
+		);
+
+		if (!confirmed) {
+			toast.error("Deletion Prompt Rejected!");
+			return;
+		}
+
+		const res = await deleteProperty(id);
+		if (res) {
+			const updatedProperties = properties.filter(
+				(property) => property._id !== id
+			);
+			setProperties(updatedProperties);
+			toast.success("Property Deleted Successfully!");
+		} else {
+			toast.error("Failed To Delete Property!");
+			alert("Failed to delete property");
+		}
+	};
 	return (
 		<section className="bg-blue-50">
 			<div className="container m-auto py-24">
@@ -48,7 +88,10 @@ const ProfilePage = () => {
 							<h2 className="text-xl font-semibold mb-4">
 								Your Listings
 							</h2>
-							{!properties.length ? (
+							{!properties.length && loading && (
+								<Spinner loading={loading} />
+							)}
+							{!properties.length && !loading ? (
 								<div>
 									<p className="font-base text-lg mb-5">
 										There are no properties added yet.
@@ -89,7 +132,7 @@ const ProfilePage = () => {
 											</div>
 											<div className="mt-2">
 												<Link
-													href="/properties/add"
+													href={`/properties/${property._id}/edit`}
 													className="bg-blue-500 text-white px-3 py-3 rounded-md mr-2 hover:bg-blue-600"
 												>
 													Edit
@@ -97,6 +140,11 @@ const ProfilePage = () => {
 												<button
 													className="bg-red-500 text-white px-3 py-2 rounded-md hover:bg-red-600"
 													type="button"
+													onClick={() => {
+														handleDeleteProperty(
+															property._id
+														);
+													}}
 												>
 													Delete
 												</button>
