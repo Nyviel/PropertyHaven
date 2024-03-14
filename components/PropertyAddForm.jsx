@@ -11,6 +11,8 @@ const PropertyAddForm = () => {
 			city: "",
 			state: "",
 			zipcode: "",
+			latitude: "",
+			longitude: "",
 		},
 		beds: "",
 		baths: "",
@@ -179,6 +181,24 @@ const PropertyAddForm = () => {
 					className="border rounded w-full py-2 px-3 mb-2"
 					placeholder="Zipcode"
 					value={fields.location.zipcode}
+					onChange={handleChange}
+				/>
+				<input
+					type="text"
+					id="latitude"
+					name="location.latitude"
+					className="border rounded w-full py-2 px-3 mb-2"
+					placeholder="Latitude"
+					value={fields.location.latitude}
+					onChange={handleChange}
+				/>
+				<input
+					type="text"
+					id="longitude"
+					name="location.longitude"
+					className="border rounded w-full py-2 px-3 mb-2"
+					placeholder="Longitude"
+					value={fields.location.zipclongitudeode}
 					onChange={handleChange}
 				/>
 			</div>
