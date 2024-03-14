@@ -1,3 +1,5 @@
+"use client";
+
 import {
 	FaBed,
 	FaBath,
@@ -6,6 +8,10 @@ import {
 	FaCheck,
 	FaMapMarker,
 } from "react-icons/fa";
+import dynamic from "next/dynamic";
+const DynamicMap = dynamic(async () => await import("./PropertyMap"), {
+	ssr: false,
+});
 
 const PropertyDetails = ({ property }) => {
 	return (
@@ -109,7 +115,7 @@ const PropertyDetails = ({ property }) => {
 				</ul>
 			</div>
 			<div className="bg-white p-6 rounded-lg shadow-md mt-6">
-				<div id="map"></div>
+				<DynamicMap location={property.location} />
 			</div>
 		</main>
 	);
