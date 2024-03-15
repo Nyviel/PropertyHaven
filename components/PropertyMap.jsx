@@ -6,6 +6,10 @@ import MarkerIcon from "leaflet/dist/images/marker-icon.png";
 import L from "leaflet";
 
 const PropertyMap = ({ location }) => {
+	if (isNaN(location.latitude) || isNaN(location.longitude)) {
+		location.latitude = 51.25;
+		location.longitude = -0.09;
+	}
 	const position = [location.latitude, location.longitude];
 	return (
 		<div id="map" style={{ height: "400px", minHeight: "100%" }}>
