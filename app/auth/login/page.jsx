@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 const LoginPage = () => {
 	const [email, setEmail] = useState("");
@@ -21,9 +22,11 @@ const LoginPage = () => {
 		});
 		if (!res.ok) {
 			setError("Failed to auth user");
-			return;
+			toast.error("Login Failed!");
+		} else {
+			router.replace("/");
+			toast.success("Signed In Successfully!");
 		}
-		router.replace("/");
 	};
 	return (
 		<section className="bg-blue-50 h-full">

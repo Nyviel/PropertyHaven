@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 const RegisterPage = () => {
 	const [email, setEmail] = useState("");
@@ -28,8 +29,10 @@ const RegisterPage = () => {
 		const res = await postUser({ name, email, password });
 		if (!res) {
 			setError("Failed to create an account");
+			toast.error("Account Creation Failed!");
 		} else {
 			router.replace("/auth/login");
+			toast.success("New Account Created Successfully!");
 		}
 	};
 	return (
