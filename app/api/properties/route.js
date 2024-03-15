@@ -82,9 +82,7 @@ export const POST = async (request) => {
 
 		const newProperty = await Property.create(propertyData);
 
-		return Response.redirect(
-			`${process.env.NEXTAUTH_URL}/properties/${newProperty._id}`
-		);
+		return new Response(JSON.stringify(newProperty), { status: 200 });
 	} catch (error) {
 		console.error("API:(/api/properties) ENCOUNTERED ERROR: ", error);
 		return new Response("Failed to add a property", { status: 500 });

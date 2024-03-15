@@ -1,7 +1,10 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const PropertyAddForm = () => {
+	const router = useRouter();
 	const [fields, setFields] = useState({
 		type: "",
 		name: "",
@@ -36,12 +39,10 @@ const PropertyAddForm = () => {
 
 		if (name.includes(".")) {
 			const [outerKey, innerKey] = name.split(".");
-			console.log(outerKey, innerKey, value);
 			setFields((prev) => ({
 				...prev,
 				[outerKey]: { ...prev[outerKey], [innerKey]: value },
 			}));
-			console.log(fields);
 		} else {
 			setFields((prev) => ({ ...prev, [name]: value }));
 		}
@@ -74,12 +75,35 @@ const PropertyAddForm = () => {
 		setFields((prev) => ({ ...prev, images: updatedImages }));
 	};
 
+	const handleFormSubmit = async (e) => {
+		e.preventDefault();
+		const formData = new FormData(e.target);
+		try {
+			const res = await fetch(
+				`${process.env.NEXT_PUBLIC_API_DOMAIN}/properties`,
+				{
+					method: "POST",
+					body: formData,
+				}
+			);
+			if (res.ok) {
+				const newProperty = await res.json();
+				router.replace(
+					`${process.env.NEXT_PUBLIC_DOMAIN}/properties/${newProperty._id}`
+				);
+				toast.success("Property has been added!");
+			} else {
+				toast.error("Failed to add new property");
+				console.error(error);
+			}
+		} catch (error) {
+			toast.error("Failed to add new property");
+			console.error(error);
+		}
+	};
+
 	return (
-		<form
-			method="POST"
-			action="/api/properties"
-			encType="multipart/form-data"
-		>
+		<form onSubmit={handleFormSubmit}>
 			<h2 className="text-3xl text-center font-semibold mb-6 text-blue-500">
 				Add Property
 			</h2>
