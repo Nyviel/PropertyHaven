@@ -61,12 +61,14 @@ const ProfilePage = () => {
 		<section className="bg-blue-50">
 			<div className="container m-auto py-24">
 				<div className="bg-white px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0">
-					<h1 className="text-3xl font-bold mb-4">Your Profile</h1>
+					<h1 className="text-3xl font-bold mx-10 mb-10 lg:mb-20 text-blue-500 text-center">
+						Your Profile
+					</h1>
 					<div className="flex flex-col md:flex-row">
-						<div className="md:w-1/4 mx-20 mt-10">
+						<div className="md:w-1/4 md:mx-10 mx-auto text-center md:text-left mb-10">
 							<div className="mb-4">
 								<Image
-									className="h-32 w-32 md:h-48 md:w-48 rounded-full mx-auto md:mx-0"
+									className="h-32 w-32 lg:h-48 lg:w-48 md:mx-0 rounded-full "
 									src={ProfileDefault}
 									alt="User"
 									height={0}
@@ -74,12 +76,12 @@ const ProfilePage = () => {
 									sizes={"100vw"}
 								/>
 							</div>
-							<h2 className="text-2xl mb-4">
-								<span className="font-bold block">Name: </span>{" "}
+							<h2 className="text-xl mb-4">
+								<span className="font-bold block">Name</span>{" "}
 								{session ? session.user?.name : ""}
 							</h2>
-							<h2 className="text-2xl">
-								<span className="font-bold block">Email: </span>{" "}
+							<h2 className="text-xl">
+								<span className="font-bold block">Email</span>{" "}
 								{session ? session.user?.email : ""}
 							</h2>
 						</div>
@@ -108,7 +110,10 @@ const ProfilePage = () => {
 							) : (
 								properties.map((property, index) => {
 									return (
-										<div key={index} className="mb-10">
+										<div
+											key={index}
+											className="mb-10 shadow-lg shadow-blue-300 p-4 rounded-md"
+										>
 											<Link
 												href={`/properties/${property._id}`}
 											>
@@ -136,6 +141,12 @@ const ProfilePage = () => {
 													className="bg-blue-500 text-white px-3 py-3 rounded-md mr-2 hover:bg-blue-600"
 												>
 													Edit
+												</Link>
+												<Link
+													href={`/properties/${property._id}`}
+													className="bg-orange-500 text-white px-3 py-3 rounded-md mr-2 hover:bg-orange-600"
+												>
+													Details
 												</Link>
 												<button
 													className="bg-red-500 text-white px-3 py-2 rounded-md hover:bg-red-600"
