@@ -1,9 +1,10 @@
 "use client";
 
 import { postUser } from "@/services/authService";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import { toast } from "react-toastify";
 
@@ -14,6 +15,14 @@ const RegisterPage = () => {
 	const [repeatPassword, setRepeatPassword] = useState("");
 	const [error, setError] = useState("");
 	const router = useRouter();
+	const { data: session } = useSession();
+
+	useEffect(() => {
+		if (session && session.user) {
+			router.replace("/");
+		}
+	}, [session]);
+
 	const handleFormSubmit = async (e) => {
 		e.preventDefault();
 		if (!email || !name || !password || !repeatPassword) {

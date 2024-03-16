@@ -1,9 +1,9 @@
 "use client";
 
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import { toast } from "react-toastify";
 
@@ -12,6 +12,13 @@ const LoginPage = () => {
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState("");
 	const router = useRouter();
+	const { data: session } = useSession();
+
+	useEffect(() => {
+		if (session && session.user) {
+			router.replace("/");
+		}
+	}, [session]);
 
 	const handleFormSubmit = async (e) => {
 		e.preventDefault();
