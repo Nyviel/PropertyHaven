@@ -1,6 +1,9 @@
 "use client";
+import React from "react";
+import { Checkbox, Tooltip } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { FaQuestionCircle } from "react-icons/fa";
 import { toast } from "react-toastify";
 
 const PropertyAddForm = () => {
@@ -166,9 +169,18 @@ const PropertyAddForm = () => {
 			</div>
 
 			<div className="mb-4 bg-blue-50 p-4">
-				<label className="block text-gray-700 font-bold mb-2">
+				<p className=" text-gray-700 font-bold mb-2">
 					Location
-				</label>
+					<Tooltip
+						showArrow={true}
+						color="primary"
+						content="Latitude and Longitude are necessary to show your property on a map"
+					>
+						<span>
+							<FaQuestionCircle className="inline-block ml-2 mb-1" />
+						</span>
+					</Tooltip>
+				</p>
 				<input
 					type="text"
 					id="street"
@@ -287,36 +299,33 @@ const PropertyAddForm = () => {
 				</label>
 				<div className="grid grid-cols-2 md:grid-cols-3 gap-2">
 					<div>
-						<input
+						<Checkbox
 							type="checkbox"
 							id="amenity_wifi"
 							name="amenities"
 							value="Wifi"
-							className="mr-2"
 							checked={fields.amenities.includes("Wifi")}
 							onChange={handleAmenitiesChange}
 						/>
 						<label htmlFor="amenity_wifi">Wifi</label>
 					</div>
 					<div>
-						<input
+						<Checkbox
 							type="checkbox"
 							id="amenity_kitchen"
 							name="amenities"
 							value="Full Kitchen"
-							className="mr-2"
 							checked={fields.amenities.includes("Full Kitchen")}
 							onChange={handleAmenitiesChange}
 						/>
 						<label htmlFor="amenity_kitchen">Full kitchen</label>
 					</div>
 					<div>
-						<input
+						<Checkbox
 							type="checkbox"
 							id="amenity_washer_dryer"
 							name="amenities"
 							value="Washer & Dryer"
-							className="mr-2"
 							checked={fields.amenities.includes(
 								"Washer & Dryer"
 							)}
@@ -327,12 +336,11 @@ const PropertyAddForm = () => {
 						</label>
 					</div>
 					<div>
-						<input
+						<Checkbox
 							type="checkbox"
 							id="amenity_free_parking"
 							name="amenities"
 							value="Free Parking"
-							className="mr-2"
 							checked={fields.amenities.includes("Free Parking")}
 							onChange={handleAmenitiesChange}
 						/>
@@ -341,36 +349,33 @@ const PropertyAddForm = () => {
 						</label>
 					</div>
 					<div>
-						<input
+						<Checkbox
 							type="checkbox"
 							id="amenity_pool"
 							name="amenities"
 							value="Swimming Pool"
-							className="mr-2"
 							checked={fields.amenities.includes("Swimming Pool")}
 							onChange={handleAmenitiesChange}
 						/>
 						<label htmlFor="amenity_pool">Swimming Pool</label>
 					</div>
 					<div>
-						<input
+						<Checkbox
 							type="checkbox"
 							id="amenity_hot_tub"
 							name="amenities"
 							value="Hot Tub"
-							className="mr-2"
 							checked={fields.amenities.includes("Hot Tub")}
 							onChange={handleAmenitiesChange}
 						/>
 						<label htmlFor="amenity_hot_tub">Hot Tub</label>
 					</div>
 					<div>
-						<input
+						<Checkbox
 							type="checkbox"
 							id="amenity_24_7_security"
 							name="amenities"
 							value="24/7 Security"
-							className="mr-2"
 							checked={fields.amenities.includes("24/7 Security")}
 							onChange={handleAmenitiesChange}
 						/>
@@ -379,12 +384,11 @@ const PropertyAddForm = () => {
 						</label>
 					</div>
 					<div>
-						<input
+						<Checkbox
 							type="checkbox"
 							id="amenity_wheelchair_accessible"
 							name="amenities"
 							value="Wheelchair Accessible"
-							className="mr-2"
 							checked={fields.amenities.includes(
 								"Wheelchair Accessible"
 							)}
@@ -395,12 +399,11 @@ const PropertyAddForm = () => {
 						</label>
 					</div>
 					<div>
-						<input
+						<Checkbox
 							type="checkbox"
 							id="amenity_elevator_access"
 							name="amenities"
 							value="Elevator Access"
-							className="mr-2"
 							checked={fields.amenities.includes(
 								"Elevator Access"
 							)}
@@ -411,24 +414,22 @@ const PropertyAddForm = () => {
 						</label>
 					</div>
 					<div>
-						<input
+						<Checkbox
 							type="checkbox"
 							id="amenity_dishwasher"
 							name="amenities"
 							value="Dishwasher"
-							className="mr-2"
 							checked={fields.amenities.includes("Dishwasher")}
 							onChange={handleAmenitiesChange}
 						/>
 						<label htmlFor="amenity_dishwasher">Dishwasher</label>
 					</div>
 					<div>
-						<input
+						<Checkbox
 							type="checkbox"
 							id="amenity_gym_fitness_center"
 							name="amenities"
 							value="Gym/Fitness Center"
-							className="mr-2"
 							checked={fields.amenities.includes(
 								"Gym/Fitness Center"
 							)}
@@ -439,12 +440,11 @@ const PropertyAddForm = () => {
 						</label>
 					</div>
 					<div>
-						<input
+						<Checkbox
 							type="checkbox"
 							id="amenity_air_conditioning"
 							name="amenities"
 							value="Air Conditioning"
-							className="mr-2"
 							checked={fields.amenities.includes(
 								"Air Conditioning"
 							)}
@@ -455,12 +455,11 @@ const PropertyAddForm = () => {
 						</label>
 					</div>
 					<div>
-						<input
+						<Checkbox
 							type="checkbox"
 							id="amenity_balcony_patio"
 							name="amenities"
 							value="Balcony/Patio"
-							className="mr-2"
 							checked={fields.amenities.includes("Balcony/Patio")}
 							onChange={handleAmenitiesChange}
 						/>
@@ -469,24 +468,22 @@ const PropertyAddForm = () => {
 						</label>
 					</div>
 					<div>
-						<input
+						<Checkbox
 							type="checkbox"
 							id="amenity_smart_tv"
 							name="amenities"
 							value="Smart TV"
-							className="mr-2"
 							checked={fields.amenities.includes("Smart TV")}
 							onChange={handleAmenitiesChange}
 						/>
 						<label htmlFor="amenity_smart_tv">Smart TV</label>
 					</div>
 					<div>
-						<input
+						<Checkbox
 							type="checkbox"
 							id="amenity_coffee_maker"
 							name="amenities"
 							value="Coffee Maker"
-							className="mr-2"
 							checked={fields.amenities.includes("Coffee Maker")}
 							onChange={handleAmenitiesChange}
 						/>
