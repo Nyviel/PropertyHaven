@@ -4,7 +4,7 @@ import Image from "next/image";
 import logo from "@/assets/images/logo-white.png";
 import profileDefault from "@/assets/images/profile.png";
 import Link from "next/link";
-import { FaSignInAlt, FaSignOutAlt, FaPen } from "react-icons/fa";
+import { FaSignInAlt, FaPen } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import NavbarLink from "./NavbarLink";
 import { signOut, useSession } from "next-auth/react";
@@ -15,7 +15,6 @@ const Navbar = () => {
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 	const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
-
 	useEffect(() => {
 		if (session?.user) {
 			console.log(session);
