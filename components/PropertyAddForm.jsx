@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaQuestionCircle } from "react-icons/fa";
 import { toast } from "react-toastify";
+import { addProperty } from "@/services/propertiesService";
 
 const PropertyAddForm = () => {
 	const router = useRouter();
@@ -81,27 +82,15 @@ const PropertyAddForm = () => {
 	const handleFormSubmit = async (e) => {
 		e.preventDefault();
 		const formData = new FormData(e.target);
-		try {
-			const res = await fetch(
-				`${process.env.NEXT_PUBLIC_API_DOMAIN}/properties`,
-				{
-					method: "POST",
-					body: formData,
-				}
+		const res = await addProperty(formData);
+		if (res) {
+			const newProperty = await res.json();
+			router.replace(
+				`${process.env.NEXT_PUBLIC_DOMAIN}/properties/${newProperty._id}`
 			);
-			if (res.ok) {
-				const newProperty = await res.json();
-				router.replace(
-					`${process.env.NEXT_PUBLIC_DOMAIN}/properties/${newProperty._id}`
-				);
-				toast.success("Property has been added!");
-			} else {
-				toast.error("Failed to add new property");
-				console.error(error);
-			}
-		} catch (error) {
-			toast.error("Failed to add new property");
-			console.error(error);
+			toast.success("Property has been added!");
+		} else {
+			toast.error("Failed to add property");
 		}
 	};
 

@@ -49,6 +49,26 @@ export async function fetchPropertiesByUID(uid) {
 	}
 }
 
+export async function addProperty(propertyFormData) {
+	try {
+		const res = await fetch(
+			`${process.env.NEXT_PUBLIC_API_DOMAIN}/properties`,
+			{
+				method: "POST",
+				body: propertyFormData,
+			}
+		);
+		if (res.ok) {
+			return res;
+		} else {
+			return null;
+		}
+	} catch (error) {
+		console.error(error);
+		return null;
+	}
+}
+
 export async function deleteProperty(id) {
 	try {
 		if (!api) {
