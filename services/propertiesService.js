@@ -12,7 +12,7 @@ export async function fetchProperties() {
 		}
 		return res.json();
 	} catch (error) {
-		console.log("SERVICE:(/properties) Error: ", error);
+		console.log("SERVICE (properties fetchProperties): ", error);
 		return [];
 	}
 }
@@ -28,7 +28,7 @@ export async function fetchProperty(id) {
 		}
 		return res.json();
 	} catch (error) {
-		console.log("SERVICE:(/properties/:id) Error: ", error);
+		console.log("SERVICE (properties fetchProperty): ", error);
 		return null;
 	}
 }
@@ -44,7 +44,7 @@ export async function fetchPropertiesByUID(uid) {
 		}
 		return res.json();
 	} catch (error) {
-		console.log("SERVICE:(/properties/user/:uid Error: ", error);
+		console.log("SERVICE (properties fetchPropertiesByUID: ", error);
 		return [];
 	}
 }
@@ -64,7 +64,7 @@ export async function addProperty(propertyFormData) {
 			return null;
 		}
 	} catch (error) {
-		console.error(error);
+		console.log("SERVICE (properties addProperty):", error);
 		return null;
 	}
 }
@@ -82,7 +82,7 @@ export async function deleteProperty(id) {
 		}
 		return true;
 	} catch (error) {
-		console.log("SERVICE:(/properties/:id Error: ", error);
+		console.log("SERVICE (properties deleteProperty): ", error);
 		return false;
 	}
 }
@@ -101,7 +101,7 @@ export async function updateProperty(id, formData) {
 		}
 		return res.json();
 	} catch (error) {
-		console.log("SERVICE:(/properties/:id Error: ", error);
+		console.log("SERVICE (properties updateProperty): ", error);
 		return null;
 	}
 }
