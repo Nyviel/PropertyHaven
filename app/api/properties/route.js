@@ -62,23 +62,27 @@ export const POST = async (request) => {
 			owner: userId,
 		};
 
-		const imageUploads = [];
-
-		for (const image of images) {
+		const uploadPromises = images.map(async (image) => {
 			const imageBuffer = await image.arrayBuffer();
 			const imageArray = Array.from(new Uint8Array(imageBuffer));
 			const imageData = Buffer.from(imageArray);
 
 			const imageBase64 = imageData.toString("base64");
-			const result = await cloudinary.uploader.upload(
-				`data:image/png;base64,${imageBase64}`,
-				{ folder: "property-haven" }
-			);
+			return cloudinary.uploader
+				.upload(`data:image/png;base64,${imageBase64}`, {
+					folder: "property-haven",
+				})
+				.then((result) => result.secure_url);
+		});
 
-			imageUploads.push(result.secure_url);
+		const imageUploads = await Promise.all(uploadPromises);
+		if (imageUploads) {
+			propertyData.images = imageUploads;
+		} else {
+			return new Response(`Failed to upload images`, {
+				status: 500,
+			});
 		}
-
-		propertyData.images = imageUploads;
 
 		const newProperty = await Property.create(propertyData);
 
