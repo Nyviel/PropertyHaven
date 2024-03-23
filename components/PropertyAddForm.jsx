@@ -1,14 +1,34 @@
 "use client";
 import React from "react";
-import { Checkbox, Tooltip } from "@nextui-org/react";
+import {
+	Checkbox,
+	Divider,
+	Input,
+	Select,
+	SelectItem,
+	Textarea,
+	Tooltip,
+} from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaQuestionCircle } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { addProperty } from "@/services/propertiesService";
+import Dropzone from "react-dropzone";
+
+const PROPERTY_TYPES = [
+	"Apartment",
+	"Condo",
+	"House",
+	"Cabin Or Cottage",
+	"Room",
+	"Studio",
+	"Other",
+];
 
 const PropertyAddForm = () => {
 	const router = useRouter();
+	const [submittingForm, setSubmittingForm] = useState(false);
 	const [fields, setFields] = useState({
 		type: "",
 		name: "",
@@ -37,6 +57,10 @@ const PropertyAddForm = () => {
 		},
 		images: [],
 	});
+
+	const handleSelectChange = (e) => {
+		setFields((prev) => ({ ...prev, type: e.target.value }));
+	};
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -67,21 +91,26 @@ const PropertyAddForm = () => {
 		setFields((prev) => ({ ...prev, amenities: updatedAmenities }));
 	};
 
-	const handleImageChange = (e) => {
-		const { files } = e.target;
-
+	const handleImageChange = (files) => {
+		console.log(files);
 		const updatedImages = [...fields.images];
-
 		for (const file of files) {
 			updatedImages.push(file);
 		}
-
 		setFields((prev) => ({ ...prev, images: updatedImages }));
+		console.log(fields);
 	};
 
 	const handleFormSubmit = async (e) => {
+		if (submittingForm) return;
+		setSubmittingForm(true);
 		e.preventDefault();
+
 		const formData = new FormData(e.target);
+		for (const image of fields.images) {
+			formData.append("images", image);
+		}
+
 		const res = await addProperty(formData);
 		if (res) {
 			const newProperty = await res.json();
@@ -92,6 +121,7 @@ const PropertyAddForm = () => {
 		} else {
 			toast.error("Failed to add property");
 		}
+		setSubmittingForm(false);
 	};
 
 	return (
@@ -100,65 +130,49 @@ const PropertyAddForm = () => {
 				Add Property
 			</h2>
 
-			<div className="mb-4">
-				<label
-					htmlFor="type"
-					className="block text-gray-700 font-bold mb-2"
-				>
-					Property Type
-				</label>
-				<select
+			<div className="flex flex-col gap-4 p-4 border rounded-md my-4">
+				<Select
 					id="type"
 					name="type"
-					className="border rounded w-full py-2 px-3"
-					required
+					label="Property Type"
+					placeholder="Select property type"
 					value={fields.type}
-					onChange={handleChange}
+					onChange={handleSelectChange}
+					isRequired
 				>
-					<option value="Apartment">Apartment</option>
-					<option value="Condo">Condo</option>
-					<option value="House">House</option>
-					<option value="Cabin Or Cottage">Cabin or Cottage</option>
-					<option value="Room">Room</option>
-					<option value="Studio">Studio</option>
-					<option value="Other">Other</option>
-				</select>
-			</div>
-			<div className="mb-4">
-				<label className="block text-gray-700 font-bold mb-2">
-					Listing Name
-				</label>
-				<input
+					{PROPERTY_TYPES.map((type) => {
+						return (
+							<SelectItem key={type} value={type}>
+								{type}
+							</SelectItem>
+						);
+					})}
+				</Select>
+
+				<Input
 					type="text"
 					id="name"
-					name="name"
-					className="border rounded w-full py-2 px-3 mb-2"
+					label="Property Name"
 					placeholder="eg. Beautiful Apartment In Miami"
-					required
+					name="name"
 					value={fields.name}
 					onChange={handleChange}
+					isRequired
 				/>
-			</div>
-			<div className="mb-4">
-				<label
-					htmlFor="description"
-					className="block text-gray-700 font-bold mb-2"
-				>
-					Description
-				</label>
-				<textarea
+
+				<Textarea
 					id="description"
 					name="description"
-					className="border rounded w-full py-2 px-3"
 					rows="4"
+					label="Description"
 					placeholder="Add an optional description of your property"
 					value={fields.description}
 					onChange={handleChange}
-				></textarea>
+				></Textarea>
 			</div>
 
-			<div className="mb-4 bg-blue-50 p-4">
-				<p className=" text-gray-700 font-bold mb-2">
+			<div className="mb-4 bg-blue-500 text-white p-4 flex flex-col gap-3 rounded-md">
+				<h3 className="font-bold mb-2">
 					Location
 					<Tooltip
 						showArrow={true}
@@ -169,122 +183,106 @@ const PropertyAddForm = () => {
 							<FaQuestionCircle className="inline-block ml-2 mb-1" />
 						</span>
 					</Tooltip>
-				</p>
-				<input
+				</h3>
+				<Input
 					type="text"
 					id="street"
 					name="location.street"
-					className="border rounded w-full py-2 px-3 mb-2"
-					placeholder="Street"
+					label="Street"
+					placeholder="Enter street name"
 					value={fields.location.street}
 					onChange={handleChange}
 				/>
-				<input
+				<Input
 					type="text"
 					id="city"
 					name="location.city"
-					className="border rounded w-full py-2 px-3 mb-2"
-					placeholder="City"
+					label="City"
+					placeholder="Enter city name"
 					required
 					value={fields.location.city}
 					onChange={handleChange}
 				/>
-				<input
+				<Input
 					type="text"
 					id="state"
 					name="location.state"
-					className="border rounded w-full py-2 px-3 mb-2"
-					placeholder="State"
+					label="State"
+					placeholder="Enter state name"
 					required
 					value={fields.location.state}
 					onChange={handleChange}
 				/>
-				<input
+				<Input
 					type="text"
 					id="zipcode"
 					name="location.zipcode"
-					className="border rounded w-full py-2 px-3 mb-2"
-					placeholder="Zipcode"
+					label="Zipcode"
+					placeholder="Enter zipcode"
 					value={fields.location.zipcode}
 					onChange={handleChange}
 				/>
-				<input
+				<Input
 					type="text"
 					id="latitude"
 					name="location.latitude"
-					className="border rounded w-full py-2 px-3 mb-2"
-					placeholder="Latitude"
+					label="Latitude"
+					placeholder="Enter latitude"
 					value={fields.location.latitude}
 					onChange={handleChange}
 				/>
-				<input
+				<Input
 					type="text"
 					id="longitude"
 					name="location.longitude"
-					className="border rounded w-full py-2 px-3 mb-2"
-					placeholder="Longitude"
-					value={fields.location.zipclongitudeode}
+					label="Longitude"
+					placeholder="Enter longitude"
+					value={fields.location.longitude}
 					onChange={handleChange}
 				/>
 			</div>
-
-			<div className="mb-4 flex flex-wrap">
+			<Divider className="my-4" />
+			<div className="my-6 flex flex-wrap">
 				<div className="w-full sm:w-1/3 pr-2">
-					<label
-						htmlFor="beds"
-						className="block text-gray-700 font-bold mb-2"
-					>
-						Beds
-					</label>
-					<input
+					<Input
 						type="number"
 						id="beds"
 						name="beds"
-						className="border rounded w-full py-2 px-3"
+						label="Beds"
+						placeholder="Enter beds count..."
 						required
 						value={fields.beds}
 						onChange={handleChange}
 					/>
 				</div>
 				<div className="w-full sm:w-1/3 px-2">
-					<label
-						htmlFor="baths"
-						className="block text-gray-700 font-bold mb-2"
-					>
-						Baths
-					</label>
-					<input
+					<Input
 						type="number"
 						id="baths"
 						name="baths"
-						className="border rounded w-full py-2 px-3"
+						label="Baths"
+						placeholder="Enter baths count..."
 						required
 						value={fields.baths}
 						onChange={handleChange}
 					/>
 				</div>
 				<div className="w-full sm:w-1/3 pl-2">
-					<label
-						htmlFor="square_feet"
-						className="block text-gray-700 font-bold mb-2"
-					>
-						Square Feet
-					</label>
-					<input
+					<Input
 						type="number"
 						id="square_feet"
 						name="square_feet"
-						className="border rounded w-full py-2 px-3"
+						label="Square Feet"
+						placeholder="Input square feet count..."
 						required
 						value={fields.square_feet}
 						onChange={handleChange}
 					/>
 				</div>
 			</div>
-
-			<div className="mb-4">
+			<div className="my-8 border p-4 rounded-md">
 				<label className="block text-gray-700 font-bold mb-2">
-					Amenities
+					Select Amenities
 				</label>
 				<div className="grid grid-cols-2 md:grid-cols-3 gap-2">
 					<div>
@@ -483,127 +481,164 @@ const PropertyAddForm = () => {
 				</div>
 			</div>
 
-			<div className="mb-4 bg-blue-50 p-4">
-				<label className="block text-gray-700 font-bold mb-2">
-					Rates (Leave blank if not applicable)
+			<div className="mb-4 bg-blue-500 p-4 text-white rounded-md">
+				<label className="block  font-bold mb-2">
+					Rates
+					<Tooltip
+						showArrow={true}
+						color="primary"
+						content="Leave blank if not applicable"
+					>
+						<span>
+							<FaQuestionCircle className="inline-block ml-2 mb-1" />
+						</span>
+					</Tooltip>
 				</label>
 				<div className="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
-					<div className="flex items-center">
-						<label htmlFor="nightly_rate" className="mr-2">
-							Nightly
-						</label>
-						<input
+					<div className="flex flex-col gap-1">
+						<Input
 							type="number"
 							id="nightly_rate"
 							name="rates.nightly"
-							className="border rounded w-full py-2 px-3"
+							label="Nightly"
+							placeholder="Enter nightly rates..."
 							value={fields.rates.nightly}
 							onChange={handleChange}
 						/>
 					</div>
-					<div className="flex items-center">
-						<label htmlFor="weekly_rate" className="mr-2">
-							Weekly
-						</label>
-						<input
+					<div className="flex flex-col gap-1">
+						<Input
 							type="number"
 							id="weekly_rate"
 							name="rates.weekly"
-							className="border rounded w-full py-2 px-3"
+							label="Weekly"
+							placeholder="Enter weekly rates..."
 							value={fields.rates.weekly}
 							onChange={handleChange}
 						/>
 					</div>
-					<div className="flex items-center">
-						<label htmlFor="monthly_rate" className="mr-2">
-							Monthly
-						</label>
-						<input
+					<div className="flex flex-col gap-1">
+						<Input
 							type="number"
 							id="monthly_rate"
 							name="rates.monthly"
-							className="border rounded w-full py-2 px-3"
+							label="Monthly"
+							placeholder="Enter monthly rates..."
 							value={fields.rates.monthly}
 							onChange={handleChange}
 						/>
 					</div>
 				</div>
 			</div>
-
+			<Divider className="my-4" />
 			<div className="mb-4">
-				<label
-					htmlFor="seller_name"
-					className="block text-gray-700 font-bold mb-2"
-				>
-					Seller Name
-				</label>
-				<input
+				<Input
 					type="text"
 					id="seller_name"
 					name="seller_info.name"
-					className="border rounded w-full py-2 px-3"
-					placeholder="Name"
+					label="Seller Name"
+					placeholder="Enter seller name..."
 					value={fields.seller_info.name}
 					onChange={handleChange}
 				/>
 			</div>
 			<div className="mb-4">
-				<label
-					htmlFor="seller_email"
-					className="block text-gray-700 font-bold mb-2"
-				>
-					Seller Email
-				</label>
-				<input
+				<Input
 					type="email"
 					id="seller_email"
 					name="seller_info.email"
-					className="border rounded w-full py-2 px-3"
-					placeholder="Email address"
-					requiredvalue={fields.seller_info.email}
+					label="Seller Email"
+					placeholder="Enter email address..."
+					required
+					value={fields.seller_info.email}
 					onChange={handleChange}
 				/>
 			</div>
 			<div className="mb-4">
-				<label
-					htmlFor="seller_phone"
-					className="block text-gray-700 font-bold mb-2"
-				>
-					Seller Phone
-				</label>
-				<input
+				<Input
 					type="tel"
 					id="seller_phone"
 					name="seller_info.phone"
-					className="border rounded w-full py-2 px-3"
-					placeholder="Phone"
+					label="Seller Phone"
+					placeholder="Enter phone number..."
 					value={fields.seller_info.phone}
 					onChange={handleChange}
 				/>
 			</div>
+			<Divider className="my-4" />
 
-			<div className="mb-4">
-				<label
-					htmlFor="images"
-					className="block text-gray-700 font-bold mb-2"
-				>
-					Images (Select up to 4 images)
+			<div className="mb-4 bg-blue-500 p-4 text-white rounded-md">
+				<label htmlFor="images" className="block font-bold mb-2">
+					Images
+					<Tooltip
+						showArrow={true}
+						color="primary"
+						content="Enter up to 4 images"
+					>
+						<span>
+							<FaQuestionCircle className="inline-block ml-2 mb-1" />
+						</span>
+					</Tooltip>
 				</label>
-				<input
-					type="file"
-					id="images"
-					name="images"
-					className="border rounded w-full py-2 px-3"
-					accept="image/*"
-					multiple
-					onChange={handleImageChange}
-				/>
+				<Dropzone onDrop={handleImageChange}>
+					{({ getRootProps, getInputProps }) => (
+						<section>
+							<div
+								{...getRootProps()}
+								className="h-48 w-full p-2 border-dashed rounded-md border-gray-300 border-2"
+							>
+								<input {...getInputProps()} />
+								<p>
+									Drag 'n' drop some files here, or click to
+									select files
+								</p>
+							</div>
+						</section>
+					)}
+				</Dropzone>
+				{fields.images.length ? (
+					<div className="my-4">
+						<h3 className="font-bold text-white">
+							Selected Images
+						</h3>
+						<div className="flex flex-col gap-3 my-2">
+							{fields.images.map((image, index) => {
+								return (
+									<div
+										key={index}
+										className="text-black flex gap-2 p-3 bg-gray-200 border-white border-1 rounded-md"
+									>
+										<p>
+											<span className="font-semibold">
+												File name:{" "}
+											</span>
+											{image.name}
+										</p>
+										<p>
+											<span className="font-semibold">
+												File size:{" "}
+											</span>
+											{image.size}B
+										</p>
+									</div>
+								);
+							})}
+						</div>
+					</div>
+				) : (
+					<div></div>
+				)}
 			</div>
 
 			<div>
 				<button
-					className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
+					className={`${
+						!submittingForm
+							? "bg-blue-500 hover:bg-blue-600"
+							: "bg-gray-700"
+					}  text-white font-bold py-2 px-4 rounded-md w-full focus:outline-none focus:shadow-outline`}
 					type="submit"
+					disabled={submittingForm}
 				>
 					Add Property
 				</button>
