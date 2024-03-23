@@ -20,7 +20,7 @@ const MainLayout = ({ children }) => {
 		<AuthProvider>
 			<html lang="en">
 				<body
-					className={`${poppins.className} ${inter.className} antialiased flex flex-col bg-blue-50`}
+					className={`${poppins.className} ${inter.className} antialiased  bg-blue-50`}
 				>
 					<NextUIWrapper>
 						<Navbar />
