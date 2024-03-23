@@ -20,11 +20,11 @@ const MainLayout = ({ children }) => {
 		<AuthProvider>
 			<html lang="en">
 				<body
-					className={`${poppins.className} ${inter.className} antialiased  bg-blue-50`}
+					className={`${poppins.className} ${inter.className} antialiased height-screen bg-blue-50`}
 				>
 					<NextUIWrapper>
 						<Navbar />
-						<main className="flex-1">{children}</main>
+						<main className="flex-1 bg-blue-50">{children}</main>
 						<Footer />
 					</NextUIWrapper>
 					<ToastContainer

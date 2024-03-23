@@ -6,13 +6,15 @@ const override = {
 };
 const Spinner = ({ loading }) => {
 	return (
-		<ClipLoader
-			color="#3b82f6"
-			loading={loading}
-			cssOverride={override}
-			size={150}
-			aria-label="Loading spinner"
-		/>
+		<div className="min-h-full">
+			<ClipLoader
+				color="#3b82f6"
+				loading={loading}
+				cssOverride={override}
+				size={150}
+				aria-label="Loading spinner"
+			/>
+		</div>
 	);
 };
 
