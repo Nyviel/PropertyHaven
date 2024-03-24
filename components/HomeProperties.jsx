@@ -8,8 +8,8 @@ const HomeProperties = async () => {
 		.sort(() => Math.random() - Math.random())
 		.slice(0, 3);
 	return (
-		<div className=" bg-blue-50">
-			<section className="px-4 py-6 bg-blue-50">
+		<>
+			<section className="px-4 py-6">
 				<div className="container-xl lg:container m-auto">
 					<h2 className="text-3xl font-semibold text-blue-500 mt-10 mb-6 text-center">
 						Recent Properties
@@ -31,12 +31,12 @@ const HomeProperties = async () => {
 			<section className="m-auto max-w-lg my-10 px-6">
 				<Link
 					href="/properties"
-					className="block bg-blue-600 text-white text-center py-4 px-6 rounded-xl shadow-xl hover:bg-blue-700"
+					className="block bg-primary-500 text-white text-center py-4 px-6 rounded-xl shadow-xl hover:bg-blue-700"
 				>
 					View All Properties
 				</Link>
 			</section>
-		</div>
+		</>
 	);
 };
 

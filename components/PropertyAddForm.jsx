@@ -125,12 +125,12 @@ const PropertyAddForm = () => {
 	};
 
 	return (
-		<form onSubmit={handleFormSubmit}>
+		<form onSubmit={handleFormSubmit} className="bg-background">
 			<h2 className="text-3xl text-center font-semibold mb-6 text-blue-500">
 				Add Property
 			</h2>
 
-			<div className="flex flex-col gap-4 p-4 border rounded-md my-4">
+			<div className="flex flex-col gap-4 my-4">
 				<Select
 					id="type"
 					name="type"
@@ -171,7 +171,7 @@ const PropertyAddForm = () => {
 				></Textarea>
 			</div>
 
-			<div className="mb-4 bg-blue-500 text-white p-4 flex flex-col gap-3 rounded-md">
+			<div className="mb-4 bg-primary-500 text-white p-4 flex flex-col gap-3 rounded-md">
 				<h3 className="font-bold mb-2">
 					Location
 					<Tooltip
@@ -192,6 +192,7 @@ const PropertyAddForm = () => {
 					placeholder="Enter street name"
 					value={fields.location.street}
 					onChange={handleChange}
+					isRequired
 				/>
 				<Input
 					type="text"
@@ -199,7 +200,7 @@ const PropertyAddForm = () => {
 					name="location.city"
 					label="City"
 					placeholder="Enter city name"
-					required
+					isRequired
 					value={fields.location.city}
 					onChange={handleChange}
 				/>
@@ -209,7 +210,7 @@ const PropertyAddForm = () => {
 					name="location.state"
 					label="State"
 					placeholder="Enter state name"
-					required
+					isRequired
 					value={fields.location.state}
 					onChange={handleChange}
 				/>
@@ -221,6 +222,7 @@ const PropertyAddForm = () => {
 					placeholder="Enter zipcode"
 					value={fields.location.zipcode}
 					onChange={handleChange}
+					isRequired
 				/>
 				<Input
 					type="text"
@@ -230,6 +232,7 @@ const PropertyAddForm = () => {
 					placeholder="Enter latitude"
 					value={fields.location.latitude}
 					onChange={handleChange}
+					isRequired
 				/>
 				<Input
 					type="text"
@@ -239,6 +242,7 @@ const PropertyAddForm = () => {
 					placeholder="Enter longitude"
 					value={fields.location.longitude}
 					onChange={handleChange}
+					isRequired
 				/>
 			</div>
 			<Divider className="my-4" />
@@ -250,7 +254,7 @@ const PropertyAddForm = () => {
 						name="beds"
 						label="Beds"
 						placeholder="Enter beds count..."
-						required
+						isRequired
 						value={fields.beds}
 						onChange={handleChange}
 					/>
@@ -262,7 +266,7 @@ const PropertyAddForm = () => {
 						name="baths"
 						label="Baths"
 						placeholder="Enter baths count..."
-						required
+						isRequired
 						value={fields.baths}
 						onChange={handleChange}
 					/>
@@ -274,14 +278,14 @@ const PropertyAddForm = () => {
 						name="square_feet"
 						label="Square Feet"
 						placeholder="Input square feet count..."
-						required
+						isRequired
 						value={fields.square_feet}
 						onChange={handleChange}
 					/>
 				</div>
 			</div>
-			<div className="my-8 border p-4 rounded-md">
-				<label className="block text-gray-700 font-bold mb-2">
+			<div className="my-8 border border-primary-200 p-4 rounded-md">
+				<label className="block text-primary-700 font-bold mb-3">
 					Select Amenities
 				</label>
 				<div className="grid grid-cols-2 md:grid-cols-3 gap-2">
@@ -481,7 +485,7 @@ const PropertyAddForm = () => {
 				</div>
 			</div>
 
-			<div className="mb-4 bg-blue-500 p-4 text-white rounded-md">
+			<div className="mb-4 bg-primary-500 p-4 text-white rounded-md">
 				<label className="block  font-bold mb-2">
 					Rates
 					<Tooltip
@@ -540,6 +544,7 @@ const PropertyAddForm = () => {
 					placeholder="Enter seller name..."
 					value={fields.seller_info.name}
 					onChange={handleChange}
+					isRequired
 				/>
 			</div>
 			<div className="mb-4">
@@ -549,9 +554,9 @@ const PropertyAddForm = () => {
 					name="seller_info.email"
 					label="Seller Email"
 					placeholder="Enter email address..."
-					required
 					value={fields.seller_info.email}
 					onChange={handleChange}
+					isRequired
 				/>
 			</div>
 			<div className="mb-4">
@@ -563,11 +568,12 @@ const PropertyAddForm = () => {
 					placeholder="Enter phone number..."
 					value={fields.seller_info.phone}
 					onChange={handleChange}
+					isRequired
 				/>
 			</div>
 			<Divider className="my-4" />
 
-			<div className="mb-4 bg-blue-500 p-4 text-white rounded-md">
+			<div className="mb-4 bg-primary-500 p-4 text-white rounded-md">
 				<label htmlFor="images" className="block font-bold mb-2">
 					Images
 					<Tooltip
@@ -634,8 +640,8 @@ const PropertyAddForm = () => {
 				<button
 					className={`${
 						!submittingForm
-							? "bg-blue-500 hover:bg-blue-600"
-							: "bg-gray-700"
+							? "bg-primary-500 hover:bg-primary-600"
+							: "bg-gray-600"
 					}  text-white font-bold py-2 px-4 rounded-md w-full focus:outline-none focus:shadow-outline`}
 					type="submit"
 					disabled={submittingForm}

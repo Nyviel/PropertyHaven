@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const NotFoundPage = () => {
 	return (
-		<section className="bg-blue-50 h-full w-full flex items-center justify-center">
+		<section className="h-full w-full flex items-center justify-center">
 			<div className="container max-w-2xl">
 				<div className="px-6 py-10 m-4 md:m-0">
 					<div className="flex justify-center">

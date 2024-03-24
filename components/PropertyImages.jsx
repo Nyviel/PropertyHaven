@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const PropertyImages = ({ images }) => {
 	return (
-		<section className="bg-blue-50 p-8">
+		<section className=" p-8">
 			<div className="container mx-auto px-5">
 				<h1 className="font-bold text-3xl text-blue-500 pt-2 pb-5">
 					Property Images

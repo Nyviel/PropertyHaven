@@ -1,68 +1,46 @@
+import { Input, Textarea } from "@nextui-org/react";
+
 const PropertyContactForm = ({ property }) => {
 	return (
-		<div className="bg-white p-6 rounded-lg shadow-md">
+		<div className="bg-primary-100 p-6 rounded-lg shadow-md">
 			<h3 className="text-xl font-bold mb-6">Contact Property Manager</h3>
 			<form>
 				<div className="mb-4">
-					<label
-						className="block text-gray-700 text-sm font-bold mb-2"
-						htmlFor="name"
-					>
-						Name:
-					</label>
-					<input
-						className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+					<Input
 						id="name"
 						type="text"
-						placeholder="Enter your name"
-						required
+						label="Name"
+						placeholder="Enter your name..."
+						isRequired
 					/>
 				</div>
 				<div className="mb-4">
-					<label
-						className="block text-gray-700 text-sm font-bold mb-2"
-						htmlFor="email"
-					>
-						Email:
-					</label>
-					<input
-						className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+					<Input
 						id="email"
 						type="email"
-						placeholder="Enter your email"
-						required
+						label="Email"
+						placeholder="Enter your email..."
+						isRequired
 					/>
 				</div>
 				<div className="mb-4">
-					<label
-						className="block text-gray-700 text-sm font-bold mb-2"
-						htmlFor="phone"
-					>
-						Phone:
-					</label>
-					<input
-						className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+					<Input
 						id="phone"
 						type="text"
-						placeholder="Enter your phone number"
+						label="Phone"
+						placeholder="Enter your phone number..."
 					/>
 				</div>
 				<div className="mb-4">
-					<label
-						className="block text-gray-700 text-sm font-bold mb-2"
-						htmlFor="message"
-					>
-						Message:
-					</label>
-					<textarea
-						className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 h-44 focus:outline-none focus:shadow-outline"
+					<Textarea
 						id="message"
-						placeholder="Enter your message"
-					></textarea>
+						label="Message"
+						placeholder="Enter your message..."
+					></Textarea>
 				</div>
 				<div>
 					<button
-						className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline flex items-center justify-center"
+						className="bg-primary-500 hover:bg-primary-600 text-gray-100 font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline flex items-center justify-center"
 						type="submit"
 					>
 						<i className="fas fa-paper-plane mr-2"></i> Send Message

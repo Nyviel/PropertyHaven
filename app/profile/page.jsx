@@ -58,7 +58,7 @@ const ProfilePage = () => {
 		}
 	};
 	return (
-		<section className="bg-blue-50">
+		<section className="">
 			<div className="container m-auto py-24">
 				<div className="bg-white px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0">
 					<h1 className="text-3xl font-bold mx-10 mb-10 lg:mb-20 text-blue-500 text-center">
@@ -102,7 +102,7 @@ const ProfilePage = () => {
 									</p>
 									<Link
 										href="/properties/add"
-										className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
+										className="0 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
 									>
 										Add Property!
 									</Link>
@@ -138,7 +138,7 @@ const ProfilePage = () => {
 											<div className="mt-2">
 												<Link
 													href={`/properties/${property._id}/edit`}
-													className="bg-blue-500 text-white px-3 py-3 rounded-md mr-2 hover:bg-blue-600"
+													className="0 text-white px-3 py-3 rounded-md mr-2 hover:bg-blue-600"
 												>
 													Edit
 												</Link>

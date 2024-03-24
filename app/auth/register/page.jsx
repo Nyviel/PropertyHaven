@@ -45,7 +45,7 @@ const RegisterPage = () => {
 		}
 	};
 	return (
-		<section className="bg-blue-50 h-full w-full">
+		<section className=" h-full w-full">
 			<div className="container h-full m-auto flex py-12 justify-center items-center">
 				<div className="sm:w-11/12 md:w-1/2 lg:w-1/3 bg-white px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0">
 					<form
@@ -134,7 +134,7 @@ const RegisterPage = () => {
 						</div>
 						<div>
 							<button
-								className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 mt-5 mb-2 rounded-full w-full focus:outline-none focus:shadow-outline"
+								className="0 hover:bg-blue-600 text-white font-bold py-2 px-4 mt-5 mb-2 rounded-full w-full focus:outline-none focus:shadow-outline"
 								type="submit"
 							>
 								Register
