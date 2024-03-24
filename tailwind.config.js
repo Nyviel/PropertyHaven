@@ -21,7 +21,6 @@ module.exports = {
 				light: {
 					colors: {
 						background: "#F4F7FE",
-						foreground: "#0E3CBE",
 						primary: {
 							50: "#F4F7FE",
 							100: "#CFDBFB",
@@ -33,6 +32,7 @@ module.exports = {
 							700: "#1148E3",
 							800: "#0F42D0",
 							900: "#0E3CBE",
+							950: "#0B0A9B",
 							DEFAULT: "#3D6DF1",
 							foreground: "#CFDBFB",
 						},
@@ -54,6 +54,7 @@ module.exports = {
 							700: "#1148E3",
 							800: "#0F42D0",
 							900: "#1951EE",
+							950: "#5C94FF",
 							DEFAULT: "#0A2B87",
 							foreground: "#FEFEFE",
 						},

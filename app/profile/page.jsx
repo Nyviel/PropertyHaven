@@ -59,9 +59,9 @@ const ProfilePage = () => {
 	};
 	return (
 		<section className="">
-			<div className="container m-auto py-24">
-				<div className="bg-white px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0">
-					<h1 className="text-3xl font-bold mx-10 mb-10 lg:mb-20 text-blue-500 text-center">
+			<div className="container m-auto py-12">
+				<div className="bg-primary-100 px-6 py-8 mb-4 shadow-lg shadow-primary-300 rounded-md m-4 md:m-0">
+					<h1 className="text-3xl font-bold mx-10 mb-10 lg:mb-20 text-primary-700 text-center">
 						Your Profile
 					</h1>
 					<div className="flex flex-col md:flex-row">
@@ -76,18 +76,22 @@ const ProfilePage = () => {
 									sizes={"100vw"}
 								/>
 							</div>
-							<h2 className="text-xl mb-4">
-								<span className="font-bold block">Name</span>{" "}
+							<h2 className="text-xl mb-4 text-primary-800">
+								<span className="font-bold block text-primary-700">
+									Name
+								</span>{" "}
 								{session ? session.user?.name : ""}
 							</h2>
-							<h2 className="text-xl">
-								<span className="font-bold block">Email</span>{" "}
+							<h2 className="text-xl text-primary-800">
+								<span className="font-bold block text-primary-700">
+									Email
+								</span>{" "}
 								{session ? session.user?.email : ""}
 							</h2>
 						</div>
 
 						<div className="md:w-3/4 md:pl-4">
-							<h2 className="text-xl font-semibold mb-4">
+							<h2 className="text-xl font-semibold mb-4 text-primary-700">
 								Your Listings
 							</h2>
 							{!properties.length && loading && (
@@ -102,7 +106,7 @@ const ProfilePage = () => {
 									</p>
 									<Link
 										href="/properties/add"
-										className="0 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
+										className="bg-primary-500 hover:bg-primary-600 text-primary-950 font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
 									>
 										Add Property!
 									</Link>
@@ -112,7 +116,7 @@ const ProfilePage = () => {
 									return (
 										<div
 											key={index}
-											className="mb-10 shadow-lg shadow-blue-300 p-4 rounded-md"
+											className="mb-10 bg-primary-50 shadow-lg shadow-primary-300 p-4 rounded-md"
 										>
 											<Link
 												href={`/properties/${property._id}`}
@@ -127,10 +131,10 @@ const ProfilePage = () => {
 												/>
 											</Link>
 											<div className="mt-2">
-												<p className="text-lg font-semibold">
+												<p className="text-lg text-primary-800 font-semibold">
 													{property.name}
 												</p>
-												<p className="text-gray-600">
+												<p className="text-primary-600">
 													Address:{" "}
 													{`${property.location.street} ${property.location.city}, ${property.location.state}`}
 												</p>
@@ -138,18 +142,18 @@ const ProfilePage = () => {
 											<div className="mt-2">
 												<Link
 													href={`/properties/${property._id}/edit`}
-													className="0 text-white px-3 py-3 rounded-md mr-2 hover:bg-blue-600"
+													className="bg-orange-500 text-white px-3 py-3 rounded-md mr-2 hover:bg-orange-600"
 												>
 													Edit
 												</Link>
 												<Link
 													href={`/properties/${property._id}`}
-													className="bg-orange-500 text-white px-3 py-3 rounded-md mr-2 hover:bg-orange-600"
+													className="bg-primary-500 text-white px-3 py-3 rounded-md mr-2 hover:bg-primary-600"
 												>
 													Details
 												</Link>
 												<button
-													className="bg-red-500 text-white px-3 py-2 rounded-md hover:bg-red-600"
+													className="bg-red-500 text-white px-3 py-3 rounded-md hover:bg-red-600"
 													type="button"
 													onClick={() => {
 														handleDeleteProperty(

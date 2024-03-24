@@ -97,7 +97,7 @@ const PropertyDetails = ({ property }) => {
 					</p>
 				</div>
 
-				<p className="text-gray-500 mb-4">{property.description}</p>
+				<p className="text-primary-950 mb-4">{property.description}</p>
 			</div>
 
 			<div className="bg-primary-100 p-6 rounded-lg shadow-md mt-6">
@@ -115,7 +115,7 @@ const PropertyDetails = ({ property }) => {
 				</ul>
 			</div>
 			<div className="bg-primary-100 p-6 rounded-lg shadow-md mt-6">
-				{/* <DynamicMap location={property.location} /> */}
+				<DynamicMap location={property.location} />
 			</div>
 		</main>
 	);

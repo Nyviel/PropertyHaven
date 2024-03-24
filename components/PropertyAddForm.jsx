@@ -135,6 +135,7 @@ const PropertyAddForm = () => {
 					id="type"
 					name="type"
 					label="Property Type"
+					color="default"
 					placeholder="Select property type"
 					value={fields.type}
 					onChange={handleSelectChange}

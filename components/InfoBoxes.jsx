@@ -13,7 +13,7 @@ const InfoBoxes = () => {
 						buttonInfo={{
 							text: "Browse Properties",
 							link: "/properties",
-							backgroundColor: "bg-orange-600",
+							backgroundColor: "bg-orange-700",
 						}}
 					>
 						Find your dream rental property. Bookmark properties and
@@ -22,11 +22,11 @@ const InfoBoxes = () => {
 					<InfoBox
 						heading="For Property Owners"
 						textColor="text-primary-900"
-						backgroundColor="bg-primary-300"
+						backgroundColor="bg-primary-100"
 						buttonInfo={{
 							text: "Add Property",
 							link: "/properties/add",
-							backgroundColor: "bg-blue-500",
+							backgroundColor: "bg-primary-500",
 						}}
 					>
 						List your properties and reach potential tenants. Rent

@@ -26,7 +26,7 @@ const Navbar = () => {
 	}, [session]);
 
 	return (
-		<nav className="bg-primary-500 border-b border-primary-500">
+		<nav className="bg-primary-500 border-b border-primary-700">
 			<div className="mx-auto lg:container px-2 sm:px-6 lg:px-0">
 				<div className="relative flex h-20 items-center justify-between">
 					<div className="absolute inset-y-0 left-0 flex items-center md:hidden">
@@ -77,7 +77,6 @@ const Navbar = () => {
 								PropertyHaven
 							</span>
 						</Link>
-						<ThemeSwitcher />
 						{/* <!-- Desktop Menu Hidden below md screens --> */}
 						<div className="hidden md:ml-6 md:block">
 							<div className="flex space-x-2">
@@ -96,13 +95,16 @@ const Navbar = () => {
 						</div>
 					</div>
 
+					{/* Theme switching menu */}
+					<ThemeSwitcher />
+
 					{/* <!-- Right Side Menu (Logged Out) --> */}
 					{!isLoggedIn && (
 						<div className="hidden md:block md:ml-6">
 							<div className="flex items-center gap-3">
 								<Link
 									href="/auth/login"
-									className="flex items-center text-white 0 hover:bg-blue-900 hover:text-white rounded-md px-3 py-2"
+									className="flex items-center text-white bg-primary-800 hover:bg-primary-900 hover:text-white rounded-md px-3 py-2"
 								>
 									<FaSignInAlt className="inline-block mr-2" />
 									<span>Login</span>
