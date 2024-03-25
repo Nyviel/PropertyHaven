@@ -7,28 +7,34 @@ import { SunIcon } from "./SunIcon";
 import { MoonIcon } from "./MoonIcon";
 
 export function ThemeSwitcher() {
-	const [mounted, setMounted] = useState(false);
 	const { theme, setTheme } = useTheme();
+	const [selected, setSelected] = useState(true);
 
 	useEffect(() => {
-		setMounted(true);
+		if (theme === "dark") {
+			setSelected(false);
+		} else {
+			setSelected(true);
+		}
 	}, []);
 
-	if (!mounted) return null;
+	useEffect(() => {
+		if (selected) {
+			setTheme("light");
+		} else {
+			setTheme("dark");
+		}
+	}, [selected]);
 
 	return (
 		<div>
 			<Switch
-				defaultSelected
-				onValueChange={(e) => {
-					if (e) {
-						setTheme("light");
-					} else {
-						setTheme("dark");
-					}
-				}}
+				isSelected={selected}
+				onValueChange={setSelected}
 				size="lg"
 				color="default"
+				startContent={<MoonIcon />}
+				endContent={<SunIcon />}
 				thumbIcon={({ isSelected, className }) =>
 					isSelected ? (
 						<SunIcon className={className} />
