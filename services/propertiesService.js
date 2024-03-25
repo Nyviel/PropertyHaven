@@ -105,3 +105,21 @@ export async function updateProperty(id, formData) {
 		return null;
 	}
 }
+
+export async function fetchSearchResults(location, propertyType) {
+	try {
+		if (!api) {
+			return null;
+		}
+		const res = await fetch(
+			`${api}/properties/search?location=${location}&propertyType=${propertyType}`
+		);
+		if (!res.ok) {
+			throw new Error("Failed to update property");
+		}
+		return res.json();
+	} catch (error) {
+		console.log("SERVICE (properties fetchSearchResults): ", error);
+		return null;
+	}
+}
