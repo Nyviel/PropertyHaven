@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { inter } from "./ui/inter";
 import { poppins } from "./ui/poppins";
 import NextUIWrapper from "@/components/NextUIWrapper";
-import { ThemeProvider as NextThemesProvider } from "next-themes";
+import NextThemesWrapper from "@/components/NextThemesWrapper";
 export const metadata = {
 	title: "Property Haven | Your go to rental website",
 	description: "Browse, rent, buy and sell properties on Property Haven!",
@@ -18,19 +18,16 @@ export const metadata = {
 const MainLayout = ({ children }) => {
 	return (
 		<AuthProvider>
-			<html lang="en">
+			<html lang="en" suppressHydrationWarning={true}>
 				<body
 					className={`${poppins.className} ${inter.className} antialiased height-screen bg-background`}
 				>
 					<NextUIWrapper>
-						<NextThemesProvider
-							attribute="class"
-							defaultTheme="light"
-						>
+						<NextThemesWrapper>
 							<Navbar />
 							<main className="flex-1">{children}</main>
 							<Footer />
-						</NextThemesProvider>
+						</NextThemesWrapper>
 					</NextUIWrapper>
 					<ToastContainer
 						position="bottom-right"

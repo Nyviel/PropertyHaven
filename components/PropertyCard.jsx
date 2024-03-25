@@ -37,7 +37,7 @@ const PropertyCard = ({ property }) => {
 						{property.name}
 					</h3>
 				</div>
-				<h3 className="absolute top-[10px] right-[10px] bg-primary-50 px-4 py-2 rounded-lg text-primary-700 font-bold text-right md:text-center lg:text-right">
+				<h3 className="absolute top-[10px] right-[10px] bg-primary-50 px-4 py-2 rounded-lg text-primary-950 font-bold text-right md:text-center lg:text-right">
 					${getRateDisplay()}
 				</h3>
 
