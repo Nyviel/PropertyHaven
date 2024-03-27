@@ -41,7 +41,7 @@ const PropertyCard = ({ property }) => {
 					${getRateDisplay()}
 				</h3>
 
-				<div className="flex justify-center gap-4 text-primary-700 mb-4">
+				<div className="flex justify-center gap-4 text-primary-950 mb-4">
 					<p>
 						<FaBed className="inline mr-2" /> {property.beds}{" "}
 						<span className="md:hidden lg:inline">Beds</span>
