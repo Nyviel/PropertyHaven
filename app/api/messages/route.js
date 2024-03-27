@@ -16,7 +16,9 @@ export const GET = async (request) => {
 			);
 		}
 
-		const messages = await Message.find({ recipient: sessionUser.userId });
+		const messages = await Message.find({ recipient: sessionUser.userId })
+			.populate("sender", "name")
+			.populate("property", "name");
 
 		return new Response(JSON.stringify({ messages }), { status: 200 });
 	} catch (error) {
