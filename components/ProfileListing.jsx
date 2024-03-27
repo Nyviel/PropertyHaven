@@ -18,7 +18,7 @@ const ProfileListing = ({ property, deleteHandler }) => {
 				<p className="text-lg text-primary-800 font-semibold">
 					{property.name}
 				</p>
-				<p className="text-primary-600">
+				<p className="text-primary-900">
 					Address:{" "}
 					{`${property.location.street} ${property.location.city}, ${property.location.state}`}
 				</p>
@@ -26,18 +26,18 @@ const ProfileListing = ({ property, deleteHandler }) => {
 			<div className="mt-2 flex gap-2 flex-wrap">
 				<Link
 					href={`/properties/${property._id}/edit`}
-					className="bg-orange-500 text-white px-3 py-3 rounded-md mr-2 hover:bg-orange-600"
+					className="bg-primary-500 text-white px-3 py-3 rounded-md mr-2 hover:bg-primary-600"
 				>
 					Edit
 				</Link>
 				<Link
 					href={`/properties/${property._id}`}
-					className="bg-primary-500 text-white px-3 py-3 rounded-md mr-2 hover:bg-primary-600"
+					className="bg-primary-700 text-white px-3 py-3 rounded-md mr-2 hover:bg-primary-800"
 				>
 					Details
 				</Link>
 				<button
-					className="bg-red-500 text-white px-3 py-3 rounded-md hover:bg-red-600"
+					className="bg-primary-900 text-white px-3 py-3 rounded-md hover:bg-primary-950"
 					type="button"
 					onClick={() => {
 						deleteHandler(property._id);

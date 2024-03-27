@@ -113,7 +113,7 @@ const Navbar = () => {
 								</Link>
 								<Link
 									href="/auth/register"
-									className="flex items-center text-white bg-orange-600 hover:bg-orange-800 hover:text-white rounded-md px-3 py-2"
+									className="flex items-center text-white bg-primary-600 hover:bg-primary-800 hover:text-white rounded-md px-3 py-2"
 								>
 									<FaPen className="inline-block mr-2" />
 									<span>Register</span>
@@ -274,7 +274,7 @@ const Navbar = () => {
 						</Link>
 						<Link
 							href="/auth/register"
-							className="flex items-center text-white bg-orange-600 hover:bg-orange-800 hover:text-white rounded-md px-3 py-2"
+							className="flex items-center text-white bg-primary-600 hover:bg-primary-800 hover:text-white rounded-md px-3 py-2"
 							onClick={() => {
 								setIsMobileMenuOpen((prev) => !prev);
 							}}

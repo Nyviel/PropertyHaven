@@ -13,7 +13,7 @@ const InfoBoxes = () => {
 						buttonInfo={{
 							text: "Browse Properties",
 							link: "/properties",
-							backgroundColor: "bg-orange-700",
+							backgroundColor: "bg-primary-700",
 						}}
 					>
 						Find your dream rental property. Bookmark properties and
