@@ -29,8 +29,8 @@ const Navbar = () => {
 		<nav className="bg-primary-500 border-b border-primary-700">
 			<div className="mx-auto lg:container px-2 sm:px-6 lg:px-0">
 				<div className="relative flex h-20 items-center justify-between">
+					{/* <!-- Mobile menu button--> */}
 					<div className="absolute inset-y-0 left-0 flex items-center md:hidden">
-						{/* <!-- Mobile menu button--> */}
 						<button
 							type="button"
 							id="mobile-dropdown-button"
@@ -63,7 +63,7 @@ const Navbar = () => {
 					<div className="flex flex-1 items-center justify-center md:items-stretch md:justify-start">
 						{/* <!-- Logo --> */}
 						<Link
-							className="flex flex-shrink-0 items-center"
+							className="hidden sm:flex flex-shrink-0 items-center"
 							href="/"
 						>
 							<Image
@@ -96,7 +96,9 @@ const Navbar = () => {
 					</div>
 
 					{/* Theme switching menu */}
-					<ThemeSwitcher />
+					<div className="mr-24 md:mr-0">
+						<ThemeSwitcher />
+					</div>
 
 					{/* <!-- Right Side Menu (Logged Out) --> */}
 					{!isLoggedIn && (

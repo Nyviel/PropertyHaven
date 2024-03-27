@@ -27,22 +27,20 @@ export function ThemeSwitcher() {
 	}, [selected]);
 
 	return (
-		<div>
-			<Switch
-				isSelected={selected}
-				onValueChange={setSelected}
-				size="lg"
-				color="default"
-				startContent={<MoonIcon />}
-				endContent={<SunIcon />}
-				thumbIcon={({ isSelected, className }) =>
-					isSelected ? (
-						<SunIcon className={className} />
-					) : (
-						<MoonIcon className={className} />
-					)
-				}
-			></Switch>
-		</div>
+		<Switch
+			isSelected={selected}
+			onValueChange={setSelected}
+			size="lg"
+			color="default"
+			startContent={<MoonIcon />}
+			endContent={<SunIcon />}
+			thumbIcon={({ isSelected, className }) =>
+				isSelected ? (
+					<SunIcon className={className} />
+				) : (
+					<MoonIcon className={className} />
+				)
+			}
+		></Switch>
 	);
 }
