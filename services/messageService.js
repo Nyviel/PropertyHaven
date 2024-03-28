@@ -37,3 +37,54 @@ export async function fetchMessages() {
 		return null;
 	}
 }
+
+export async function toggleRead(id) {
+	try {
+		if (!api) {
+			return null;
+		}
+
+		const res = await fetch(`${api}/messages/${id}`, { method: "PUT" });
+		if (!res.ok) {
+			throw new Error("Failed to fetch data");
+		}
+		return res.json();
+	} catch (error) {
+		console.log("SERVICE (message toggleRead): ", error);
+		return null;
+	}
+}
+
+export async function deleteMessage(id) {
+	try {
+		if (!api) {
+			return null;
+		}
+
+		const res = await fetch(`${api}/messages/${id}`, { method: "DELETE" });
+		if (!res.ok) {
+			throw new Error("Failed to fetch data");
+		}
+		return res.json();
+	} catch (error) {
+		console.log("SERVICE (message deleteMessage): ", error);
+		return null;
+	}
+}
+
+export async function fetchUnreadCount() {
+	try {
+		if (!api) {
+			return null;
+		}
+
+		const res = await fetch(`${api}/messages/unread-count`);
+		if (!res.ok) {
+			throw new Error("Failed to fetch data");
+		}
+		return res.json();
+	} catch (error) {
+		console.log("SERVICE (message fetchUnreadCount): ", error);
+		return null;
+	}
+}
