@@ -8,6 +8,7 @@ import { inter } from "./ui/inter";
 import { poppins } from "./ui/poppins";
 import NextUIWrapper from "@/components/NextUIWrapper";
 import NextThemesWrapper from "@/components/NextThemesWrapper";
+import { GlobalProvider } from "@/context/GlobalContext";
 export const metadata = {
 	title: "Property Haven | Your go to rental website",
 	description: "Browse, rent, buy and sell properties on Property Haven!",
@@ -17,34 +18,36 @@ export const metadata = {
 
 const MainLayout = ({ children }) => {
 	return (
-		<AuthProvider>
-			<html lang="en" suppressHydrationWarning={true}>
-				<body
-					className={`${poppins.className} ${inter.className} antialiased height-screen bg-background`}
-				>
-					<NextUIWrapper>
-						<NextThemesWrapper>
-							<Navbar />
-							<main className="flex-1">{children}</main>
-							<Footer />
-						</NextThemesWrapper>
-					</NextUIWrapper>
-					<ToastContainer
-						position="bottom-right"
-						autoClose={5000}
-						hideProgressBar={false}
-						newestOnTop={false}
-						closeOnClick
-						rtl={false}
-						pauseOnFocusLoss
-						draggable
-						pauseOnHover
-						theme="colored"
-						transition={Bounce}
-					/>
-				</body>
-			</html>
-		</AuthProvider>
+		<GlobalProvider>
+			<AuthProvider>
+				<html lang="en" suppressHydrationWarning={true}>
+					<body
+						className={`${poppins.className} ${inter.className} antialiased height-screen bg-background`}
+					>
+						<NextUIWrapper>
+							<NextThemesWrapper>
+								<Navbar />
+								<main className="flex-1">{children}</main>
+								<Footer />
+							</NextThemesWrapper>
+						</NextUIWrapper>
+						<ToastContainer
+							position="bottom-right"
+							autoClose={5000}
+							hideProgressBar={false}
+							newestOnTop={false}
+							closeOnClick
+							rtl={false}
+							pauseOnFocusLoss
+							draggable
+							pauseOnHover
+							theme="colored"
+							transition={Bounce}
+						/>
+					</body>
+				</html>
+			</AuthProvider>
+		</GlobalProvider>
 	);
 };
 
