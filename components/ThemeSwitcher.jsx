@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { SunIcon } from "./SunIcon";
 import { MoonIcon } from "./MoonIcon";
 
-export function ThemeSwitcher() {
+export function ThemeSwitcher({}) {
 	const { theme, setTheme } = useTheme();
 	const [selected, setSelected] = useState(true);
 
@@ -18,18 +18,17 @@ export function ThemeSwitcher() {
 		}
 	}, []);
 
-	useEffect(() => {
-		if (selected) {
-			setTheme("light");
-		} else {
-			setTheme("dark");
-		}
-	}, [selected]);
-
 	return (
 		<Switch
 			isSelected={selected}
-			onValueChange={setSelected}
+			onValueChange={(value) => {
+				setSelected(value);
+				if (value) {
+					setTheme("light");
+				} else {
+					setTheme("dark");
+				}
+			}}
 			size="lg"
 			color="default"
 			startContent={<MoonIcon />}
