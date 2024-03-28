@@ -14,8 +14,7 @@ const Messages = () => {
 		const getMessages = async () => {
 			const res = await fetchMessages();
 			if (res) {
-				setMessages(res.messages);
-				console.log(res.messages);
+				setMessages(res);
 			} else {
 				toast.error("Failed to fetch messages");
 			}
@@ -31,7 +30,7 @@ const Messages = () => {
 					<h1 className="text-3xl font-bold mb-4">Your Messages</h1>
 
 					<div className="space-y-4">
-						{(!messages.length && loading) ?? (
+						{!messages.length && loading && (
 							<Spinner loading={loading} />
 						)}
 						{!messages.length ? (
