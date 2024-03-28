@@ -16,11 +16,24 @@ export const GET = async (request) => {
 			);
 		}
 
-		const messages = await Message.find({ recipient: sessionUser.userId })
+		const readMessages = await Message.find({
+			recipient: sessionUser.userId,
+			read: true,
+		})
+			.sort({ createdAt: -1 })
 			.populate("sender", "name")
 			.populate("property", "name");
 
-		return new Response(JSON.stringify({ messages }), { status: 200 });
+		const unreadMessages = await Message.find({
+			recipient: sessionUser.userId,
+			read: false,
+		})
+			.sort({ createdAt: -1 })
+			.populate("sender", "name")
+			.populate("property", "name");
+
+		const messages = [...unreadMessages, ...readMessages];
+		return new Response(JSON.stringify(messages), { status: 200 });
 	} catch (error) {
 		console.error(error);
 		return new Response(
