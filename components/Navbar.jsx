@@ -9,19 +9,35 @@ import { useEffect, useState } from "react";
 import NavbarLink from "./NavbarLink";
 import { signOut, useSession } from "next-auth/react";
 import { ThemeSwitcher } from "./ThemeSwitcher";
+import { fetchUnreadCount } from "@/services/messageService";
+import { useGlobalContext } from "@/context/GlobalContext";
 
 const Navbar = () => {
 	const { data: session } = useSession();
 
+	const { unreadCount, setUnreadCount } = useGlobalContext();
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 	const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
+
 	useEffect(() => {
 		if (session?.user) {
 			console.log(session);
 			setIsLoggedIn(true);
 		} else {
 			setIsLoggedIn(false);
+		}
+	}, [session]);
+
+	useEffect(() => {
+		const getUnreadMessagesCount = async () => {
+			const res = await fetchUnreadCount();
+			if (res) {
+				setUnreadCount(res.count);
+			}
+		};
+		if (session?.user) {
+			getUnreadMessagesCount();
 		}
 	}, [session]);
 
@@ -149,10 +165,11 @@ const Navbar = () => {
 										/>
 									</svg>
 								</button>
-								<span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
-									2
-									{/* <!-- Replace with the actual number of notifications --> */}
-								</span>
+								{unreadCount > 0 && (
+									<span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
+										{unreadCount}
+									</span>
+								)}
 							</Link>
 							{/* <!-- Profile dropdown button --> */}
 							<div className="relative ml-3">
