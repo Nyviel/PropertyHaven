@@ -285,7 +285,7 @@ const PropertyAddForm = () => {
 					/>
 				</div>
 			</div>
-			<div className="my-8 border border-primary-200 p-4 rounded-md">
+			<div className="my-8 border-2 border-primary-200 p-4 rounded-md">
 				<label className="block text-primary-700 font-bold mb-3">
 					Select Amenities
 				</label>
