@@ -13,7 +13,7 @@ import { toast } from "react-toastify";
 const SearchResultsPage = () => {
 	const searchParams = useSearchParams();
 	const [properties, setProperties] = useState([]);
-	const [loading, setLoading] = useState(false);
+	const [loading, setLoading] = useState(true);
 
 	const location = searchParams.get("location");
 	const propertyType = searchParams.get("propertyType");

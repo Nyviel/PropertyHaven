@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 const SavedPropertiesPage = () => {
 	const { data: session } = useSession();
 	const [properties, setProperties] = useState([]);
-	const [loading, setLoading] = useState(false);
+	const [loading, setLoading] = useState(true);
 	const router = useRouter();
 
 	useEffect(() => {
