@@ -3,7 +3,7 @@ import Link from "next/link";
 import { fetchProperties } from "@/services/propertiesService";
 
 const HomeProperties = async () => {
-	const properties = await fetchProperties();
+	const properties = (await fetchProperties()).properties;
 	const recentProperties = properties
 		.sort(() => Math.random() - Math.random())
 		.slice(0, 3);

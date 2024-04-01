@@ -1,12 +1,15 @@
 const api = process.env.NEXT_PUBLIC_API_DOMAIN || null;
 
-export async function fetchProperties() {
+export async function fetchProperties(page = 1, pageSize = 9) {
 	try {
 		if (!api) {
 			return [];
 		}
 
-		const res = await fetch(`${api}/properties`, { cache: "no-store" });
+		const res = await fetch(
+			`${api}/properties?page=${page}&pageSize=${pageSize}`,
+			{ cache: "no-store" }
+		);
 		if (!res.ok) {
 			throw new Error("Failed to fetch data");
 		}
