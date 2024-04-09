@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { Bounce, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "photoswipe/dist/photoswipe.css";
 import { inter } from "./ui/inter";
 import { poppins } from "./ui/poppins";
 import NextUIWrapper from "@/components/NextUIWrapper";

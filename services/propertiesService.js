@@ -126,3 +126,22 @@ export async function fetchSearchResults(location, propertyType) {
 		return null;
 	}
 }
+
+export async function fetchFeaturedProperties() {
+	try {
+		if (!api) {
+			return [];
+		}
+
+		const res = await fetch(`${api}/properties/featured`, {
+			cache: "no-store",
+		});
+		if (!res.ok) {
+			throw new Error("Failed to fetch data");
+		}
+		return res.json();
+	} catch (error) {
+		console.log("SERVICE (properties fetchFeaturedProperties): ", error);
+		return [];
+	}
+}
