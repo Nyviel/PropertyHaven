@@ -11,7 +11,7 @@ const Pagination = ({ page, pageSize, totalItems, onPageChange }) => {
 			>
 				Previous
 			</button>
-			<span class="mx-2">
+			<span className="mx-2">
 				Page {page} of {totalPages}
 			</span>
 			<button
