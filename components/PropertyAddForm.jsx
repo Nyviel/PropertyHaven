@@ -102,26 +102,27 @@ const PropertyAddForm = () => {
 	};
 
 	const handleFormSubmit = async (e) => {
-		if (submittingForm) return;
-		setSubmittingForm(true);
 		e.preventDefault();
+		toast.info("Adding new properties is currently disabled");
+		// if (submittingForm) return;
+		// setSubmittingForm(true);
 
-		const formData = new FormData(e.target);
-		for (const image of fields.images) {
-			formData.append("images", image);
-		}
+		// const formData = new FormData(e.target);
+		// for (const image of fields.images) {
+		// 	formData.append("images", image);
+		// }
 
-		const res = await addProperty(formData);
-		if (res) {
-			const newProperty = await res.json();
-			router.replace(
-				`${process.env.NEXT_PUBLIC_DOMAIN}/properties/${newProperty._id}`
-			);
-			toast.success("Property has been added!");
-		} else {
-			toast.error("Failed to add property");
-		}
-		setSubmittingForm(false);
+		// const res = await addProperty(formData);
+		// if (res) {
+		// 	const newProperty = await res.json();
+		// 	router.replace(
+		// 		`${process.env.NEXT_PUBLIC_DOMAIN}/properties/${newProperty._id}`
+		// 	);
+		// 	toast.success("Property has been added!");
+		// } else {
+		// 	toast.error("Failed to add property");
+		// }
+		// setSubmittingForm(false);
 	};
 
 	return (
