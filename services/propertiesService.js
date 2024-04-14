@@ -15,7 +15,7 @@ export async function fetchProperties(page = 1, pageSize = 9) {
 		}
 		return res.json();
 	} catch (error) {
-		console.log("SERVICE (properties fetchProperties): ", error);
+		console.error("SERVICE (properties fetchProperties): ", error);
 		return [];
 	}
 }
@@ -31,7 +31,7 @@ export async function fetchProperty(id) {
 		}
 		return res.json();
 	} catch (error) {
-		console.log("SERVICE (properties fetchProperty): ", error);
+		console.error("SERVICE (properties fetchProperty): ", error);
 		return null;
 	}
 }
@@ -47,7 +47,7 @@ export async function fetchPropertiesByUID(uid) {
 		}
 		return res.json();
 	} catch (error) {
-		console.log("SERVICE (properties fetchPropertiesByUID: ", error);
+		console.error("SERVICE (properties fetchPropertiesByUID: ", error);
 		return [];
 	}
 }
@@ -67,7 +67,7 @@ export async function addProperty(propertyFormData) {
 			return null;
 		}
 	} catch (error) {
-		console.log("SERVICE (properties addProperty):", error);
+		console.error("SERVICE (properties addProperty):", error);
 		return null;
 	}
 }
@@ -85,7 +85,7 @@ export async function deleteProperty(id) {
 		}
 		return true;
 	} catch (error) {
-		console.log("SERVICE (properties deleteProperty): ", error);
+		console.error("SERVICE (properties deleteProperty): ", error);
 		return false;
 	}
 }
@@ -104,7 +104,7 @@ export async function updateProperty(id, formData) {
 		}
 		return res.json();
 	} catch (error) {
-		console.log("SERVICE (properties updateProperty): ", error);
+		console.error("SERVICE (properties updateProperty): ", error);
 		return null;
 	}
 }
@@ -122,7 +122,7 @@ export async function fetchSearchResults(location, propertyType) {
 		}
 		return res.json();
 	} catch (error) {
-		console.log("SERVICE (properties fetchSearchResults): ", error);
+		console.error("SERVICE (properties fetchSearchResults): ", error);
 		return null;
 	}
 }
@@ -141,7 +141,7 @@ export async function fetchFeaturedProperties() {
 		}
 		return res.json();
 	} catch (error) {
-		console.log("SERVICE (properties fetchFeaturedProperties): ", error);
+		console.error("SERVICE (properties fetchFeaturedProperties): ", error);
 		return [];
 	}
 }

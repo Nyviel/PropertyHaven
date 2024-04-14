@@ -81,7 +81,7 @@ export const POST = async (request) => {
 
 		return new Response(JSON.stringify(message), { status: 200 });
 	} catch (error) {
-		console.log("API: (/api/messages POST): ", error);
+		console.error("API: (/api/messages POST): ", error);
 		return new Response(
 			JSON.stringify({ message: "Something went wrong" }),
 			{ status: 500 }

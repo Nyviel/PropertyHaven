@@ -29,7 +29,7 @@ const ProfilePage = () => {
 				);
 				setProperties(newProperties);
 			} catch (error) {
-				console.log(error);
+				console.error(error);
 			} finally {
 				setLoading(false);
 			}

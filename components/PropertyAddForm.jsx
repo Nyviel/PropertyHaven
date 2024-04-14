@@ -92,13 +92,11 @@ const PropertyAddForm = () => {
 	};
 
 	const handleImageChange = (files) => {
-		console.log(files);
 		const updatedImages = [...fields.images];
 		for (const file of files) {
 			updatedImages.push(file);
 		}
 		setFields((prev) => ({ ...prev, images: updatedImages }));
-		console.log(fields);
 	};
 
 	const handleFormSubmit = async (e) => {

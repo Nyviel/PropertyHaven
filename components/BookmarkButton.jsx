@@ -13,7 +13,6 @@ const BookmarkButton = ({ property }) => {
 		const bookmarkCheck = async () => {
 			if (session && session.user) {
 				const res = await checkBookmark(property);
-				console.log(res);
 				if (res !== null) {
 					setIsBookmarked(res.isBookmarked);
 				}
@@ -30,7 +29,6 @@ const BookmarkButton = ({ property }) => {
 
 		try {
 			const res = await toggleBookmark(property);
-			console.log(res);
 			if (res) {
 				toast.success(res.message);
 				setIsBookmarked(res.isBookmarked);

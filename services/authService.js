@@ -14,7 +14,7 @@ export async function postUser(user) {
 		}
 		return true;
 	} catch (error) {
-		console.log("SERVICE (auth postUser): ", error);
+		console.error("SERVICE (auth postUser): ", error);
 		return false;
 	}
 }

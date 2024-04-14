@@ -21,7 +21,6 @@ export const authOptions = {
 				}
 
 				if (user && pwdMatch) {
-					console.log("All good, returning user");
 					return user;
 				} else {
 					return null;

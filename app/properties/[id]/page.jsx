@@ -24,7 +24,7 @@ const PropertyPage = () => {
 				const propertyData = await fetchProperty(id);
 				setProperty(propertyData);
 			} catch (error) {
-				console.log("PAGE: Error Fetching Property: ", error);
+				console.error("PAGE: Error Fetching Property: ", error);
 			} finally {
 				setLoading(false);
 			}

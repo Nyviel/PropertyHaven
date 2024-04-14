@@ -15,7 +15,7 @@ export const toggleBookmark = async (property) => {
 			return null;
 		}
 	} catch (error) {
-		console.log("SERVICE: (bookmarks toggleBookmark):", error);
+		console.error("SERVICE: (bookmarks toggleBookmark):", error);
 		return null;
 	}
 };
@@ -35,7 +35,7 @@ export const checkBookmark = async (property) => {
 			return null;
 		}
 	} catch (error) {
-		console.log("SERVICE: (bookmarks checkBookmark):", error);
+		console.error("SERVICE: (bookmarks checkBookmark):", error);
 		return null;
 	}
 };
@@ -49,7 +49,10 @@ export const fetchBookmarkedProperties = async () => {
 			return [];
 		}
 	} catch (error) {
-		console.log("SERVICE: (bookmarks fetchBookmarkedProperties): ", error);
+		console.error(
+			"SERVICE: (bookmarks fetchBookmarkedProperties): ",
+			error
+		);
 		return null;
 	}
 };

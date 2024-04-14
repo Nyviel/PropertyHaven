@@ -16,7 +16,7 @@ export async function sendMessage(data) {
 
 		return [res.status, await res.json()];
 	} catch (error) {
-		console.log("SERVICE (message sendMessage): ", error);
+		console.error("SERVICE (message sendMessage): ", error);
 		return null;
 	}
 }
@@ -33,7 +33,7 @@ export async function fetchMessages() {
 		}
 		return res.json();
 	} catch (error) {
-		console.log("SERVICE (message fetchMessages): ", error);
+		console.error("SERVICE (message fetchMessages): ", error);
 		return null;
 	}
 }
@@ -50,7 +50,7 @@ export async function toggleRead(id) {
 		}
 		return res.json();
 	} catch (error) {
-		console.log("SERVICE (message toggleRead): ", error);
+		console.error("SERVICE (message toggleRead): ", error);
 		return null;
 	}
 }
@@ -67,7 +67,7 @@ export async function deleteMessage(id) {
 		}
 		return res.json();
 	} catch (error) {
-		console.log("SERVICE (message deleteMessage): ", error);
+		console.error("SERVICE (message deleteMessage): ", error);
 		return null;
 	}
 }
@@ -84,7 +84,7 @@ export async function fetchUnreadCount() {
 		}
 		return res.json();
 	} catch (error) {
-		console.log("SERVICE (message fetchUnreadCount): ", error);
+		console.error("SERVICE (message fetchUnreadCount): ", error);
 		return null;
 	}
 }

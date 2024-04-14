@@ -36,7 +36,7 @@ const PropertyContactForm = ({ property }) => {
 				toast.error(res.message);
 			}
 		} catch (error) {
-			console.log(error);
+			console.error(error);
 			toast.error(
 				"Something went wrong while attempting to send message"
 			);

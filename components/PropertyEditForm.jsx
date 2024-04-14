@@ -72,7 +72,8 @@ const PropertyEditForm = () => {
 				}
 				setFields(property);
 			} catch (error) {
-				console.log(error);
+				console.error(error);
+				toast.error("Failed fetching property data");
 			} finally {
 				setLoading(false);
 			}
@@ -86,12 +87,10 @@ const PropertyEditForm = () => {
 
 		if (name.includes(".")) {
 			const [outerKey, innerKey] = name.split(".");
-			console.log(outerKey, innerKey, value);
 			setFields((prev) => ({
 				...prev,
 				[outerKey]: { ...prev[outerKey], [innerKey]: value },
 			}));
-			console.log(fields);
 		} else {
 			setFields((prev) => ({ ...prev, [name]: value }));
 		}
@@ -125,7 +124,7 @@ const PropertyEditForm = () => {
 			}
 		} catch (error) {
 			toast.error("Failed To Update Property!");
-			console.log(error);
+			console.error(error);
 		}
 	};
 
