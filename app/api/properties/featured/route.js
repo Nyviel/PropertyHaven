@@ -5,16 +5,10 @@ import Property from "@/models/Property";
 export const GET = async (request) => {
 	try {
 		await connectDB();
-		const { searchParams } = new URL(request.url);
-		const page = searchParams.get("page") || 1;
-		const pageSize = searchParams.get("pageSize") || 6;
-		const skip = (page - 1) * pageSize;
-
-		const total = await Property.countDocuments();
-
-		const properties = await Property.find({ is_featured: true })
-			.skip(skip)
-			.limit(pageSize);
+		const total = 3;
+		const properties = await Property.find({ is_featured: true }).limit(
+			total
+		);
 		return new Response(JSON.stringify({ properties, total }), {
 			status: 200,
 		});

@@ -7,9 +7,9 @@ import cloudinary from "@/config/cloudinary";
 export const GET = async (request) => {
 	try {
 		await connectDB();
-		const { searchParams } = new URL(request.url);
-		const page = searchParams.get("page") || 1;
-		const pageSize = searchParams.get("pageSize") || 6;
+		const page = request.nextUrl.searchParams.get("page") || 1;
+		const pageSize = request.nextUrl.searchParams.get("pageSize") || 6;
+
 		const skip = (page - 1) * pageSize;
 
 		const total = await Property.countDocuments();
