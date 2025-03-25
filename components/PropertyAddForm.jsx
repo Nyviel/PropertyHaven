@@ -13,7 +13,6 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaQuestionCircle } from "react-icons/fa";
 import { toast } from "react-toastify";
-import { addProperty } from "@/services/propertiesService";
 import Dropzone from "react-dropzone";
 
 const PROPERTY_TYPES = [
