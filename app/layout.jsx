@@ -10,6 +10,7 @@ import { poppins } from "./ui/poppins";
 import NextUIWrapper from "@/components/NextUIWrapper";
 import NextThemesWrapper from "@/components/NextThemesWrapper";
 import { GlobalProvider } from "@/context/GlobalContext";
+import Banner from "@/components/Banner";
 export const metadata = {
 	title: "Property Haven | Your go to rental website",
 	description: "Browse, rent, buy and sell properties on Property Haven!",
@@ -27,6 +28,7 @@ const MainLayout = ({ children }) => {
 					>
 						<NextUIWrapper>
 							<NextThemesWrapper>
+								<Banner />
 								<Navbar />
 								<main className="flex-1">{children}</main>
 								<Footer />
